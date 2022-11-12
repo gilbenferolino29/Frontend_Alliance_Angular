@@ -34,5 +34,5 @@ export class GlobalConstants {
     //STATUS URLS
         //GET
     public static statusInfo = "status/";
-    public static status = "status/";
+    public static allStatus = "status/";
 }
