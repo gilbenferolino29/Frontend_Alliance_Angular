@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Khula:wght@300;400;600;700;800&display=swap");
+
+#content {
+  padding-top: 18em;
+  padding-bottom: 303px;
+  background-color: #fff;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: "Khula", sans-serif;
+}
+
+.card {
+  width: 374px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 16px 14px rgba(0, 0, 0, 8%);
+  background-color: #f1f1f133;
+}
+label {
+  margin-left: 5px;
+  margin-top: 1px;
+  color: #000;
+}
+
+.btn.btn-primary {
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 150px;
+  margin-bottom: 5px;
+  border-radius: 200px;
+  font-weight: 700;
+  line-height: 26px;
+  position: relative;
+}
+
+p {
+  margin-left: 15px;
+}
+p a {
+  text-decoration: none;
+}
+label a {
+  text-decoration: none;
+  margin-left: 88px;
+  color: #000;
+}
+
+#exampleFormControlInput1 {
+  width: 342px;
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.card-header {
+  font-weight: bold;
+  text-align: left;
+  color: #fff;
+  background-color: #1e88e5;
+}
+
+img {
+  margin-top: 24px;
+  margin-left: 25px;
+}
+
+.buttons {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+footer {
+  background-color: #1976d2;
+}
