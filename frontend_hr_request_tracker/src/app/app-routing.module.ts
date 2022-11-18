@@ -23,18 +23,7 @@ const routes: Routes = [
   }
 ];
 
-  },
-  {
-    path:'home',
-    component: UserHomeComponent, 
-  },
-  {
-    path:'admin',
-    component: AdminHomeComponent,
 
-  }
-
-];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
