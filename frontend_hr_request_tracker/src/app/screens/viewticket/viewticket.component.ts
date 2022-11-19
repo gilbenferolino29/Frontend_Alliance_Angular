@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-viewticket',
+  templateUrl: './viewticket.component.html',
+  styleUrls: ['./viewticket.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ViewticketComponent implements OnInit {
 
   constructor(
     private router: Router
@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
   nav(destination: string) {
     this.router.navigate([destination]);
   }

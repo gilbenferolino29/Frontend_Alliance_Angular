@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landingpage',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class LandingpageComponent implements OnInit {
   observer: IntersectionObserver;
   hiddenElemnts:any;
-  constructor() { 
+  constructor(
+    private router: Router
+  ) { 
     this.observer = new IntersectionObserver((entries)=>[
       entries.forEach((entry)=>{
         console.log(entry)
@@ -28,6 +31,9 @@ export class LandingpageComponent implements OnInit {
     
   }
 
+  nav(destination: string) {
+    this.router.navigate([destination]);
+  }
   
 
 

@@ -10,6 +10,10 @@ import { UserHomeComponent } from './screens/user-screens/home-ticket-user/user-
 import { AdminHomeComponent } from './screens/admin-screens/home-ticket-admin/admin-home/admin-home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ViewticketComponent } from './screens/viewticket/viewticket.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,12 +21,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     RegisterComponent,
     UserHomeComponent,
-    AdminHomeComponent
+    AdminHomeComponent,
+    ViewticketComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

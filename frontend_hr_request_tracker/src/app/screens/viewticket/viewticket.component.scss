@@ -12,6 +12,10 @@
     display: flex;
     justify-content: center;
   }
+
+  #forms{
+   padding-left: 158px;
+  }
   
   nav{
     background-size: contain;
@@ -59,10 +63,6 @@
     margin-left: 88px;
   }
   
-  #exampleFormControlInput1 {
-    width: 342px;
-    margin-bottom: 10px;
-  }
   
   
   .card-header {
@@ -70,6 +70,7 @@
     text-align: left;
     color: #fff;
     background-color: #1e88e5;
+    
   }
   
   
@@ -88,6 +89,34 @@
     padding-right: 15px;
     margin-bottom: auto;
   }
+  
+  .left{
+    float:left;
+    margin-right: 25px;
+  }
+  
+  .clear{
+    clear:both;
+  }
+
+  .Subject{
+    width: 455px;
+  }
+
+  .Description{
+    width: 455px;
+
+  }
+
+  textarea{
+    resize: none;
+  }
+
+  .dates{
+    justify-content: center;
+    padding-left: 40px;
+  }
+
 
   /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
