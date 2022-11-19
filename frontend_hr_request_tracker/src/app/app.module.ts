@@ -11,6 +11,7 @@ import { AdminHomeComponent } from './screens/admin-screens/home-ticket-admin/ad
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ViewticketComponent } from './screens/viewticket/viewticket.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,13 @@ import { ViewticketComponent } from './screens/viewticket/viewticket.component';
     RegisterComponent,
     UserHomeComponent,
     AdminHomeComponent,
-    ViewticketComponent
+    ViewticketComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
