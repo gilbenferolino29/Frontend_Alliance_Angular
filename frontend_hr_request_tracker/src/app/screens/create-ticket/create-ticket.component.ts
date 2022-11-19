@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.scss']
+  selector: 'app-create-ticket',
+  templateUrl: './create-ticket.component.html',
+  styleUrls: ['./create-ticket.component.css']
 })
-export class UserHomeComponent implements OnInit {
+export class CreateTicketComponent implements OnInit {
 
   constructor(
     private router: Router
@@ -18,4 +18,5 @@ export class UserHomeComponent implements OnInit {
   nav(destination: string) {
     this.router.navigate([destination]);
   }
+
 }
