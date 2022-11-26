@@ -28,7 +28,7 @@ export class QueryService {
   }
 
   public deleteTicket(id:string){
-    return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteTicket);
+    return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteTicket + id);
   }
 
   //TICKET TYPE REQUESTS

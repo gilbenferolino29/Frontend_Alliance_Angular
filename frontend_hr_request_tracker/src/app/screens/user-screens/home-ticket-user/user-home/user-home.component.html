@@ -1,4 +1,5 @@
-<nav class="navbar navbar-light bg-light justify-content-center">
+<div id = "navigationbar">
+  <nav class="navbar navbar-light bg-light justify-content-center">
     <a class="navbar-brand" href="#">
       <img
         src="https://alliance.com.ph/images/asi-logo-invert.svg"
@@ -8,115 +9,82 @@
       />
     </a>
   </nav>
-  
-  <div id="home">
-  
-    <div id ="menu">
-      <div class= "buttons">
-        <a class="btn btn-primary disabled">Ticket List</a>
-        <a class="btn btn-primary" (click)="nav('new')">New Ticket</a>
-    </div>
-  </div>
-  
-  <div id="content">
-    <div class="card">
-      <div class="card-header">Ticket List</div>
-      <div class="card-body">
-        <div class="form-outline mb-4">
-          <input
-            type="search"
-            class="form-control"
-            id="datatable-search-input"
-            placeholder="Search"
-          />
+</div>
+
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" opened>
+      <div id = "sidenavigationbar">
+      <!-- Sidebar -->
+      <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+        <div class="position-sticky">
+          <div class="list-group list-group-flush mx-3 mt-4">
+            <a
+              href="#"
+              class="list-group-item list-group-item-action py-2 ripple"
+              aria-current="true"
+            >
+              <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>View Ticket</span>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
+              <i class="fas fa-chart-area fa-fw me-3"></i><span>Create Ticket</span>
+            </a>
+          </div>
         </div>
-        <!-- <div class="text-center" *ngIf="users == 0">
-                  <div class="spinner-border" role="status">
-                  </div>
-                </div> -->
-        <!-- <div id="datatable" *ngIf="users != 0"> -->
-        <table class="table table-hover" style="overflow: auto; height: 480px">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Assignee</th>
-              <th></th>
-              <th scope="col">Tracker</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- <tr *ngFor="let user of users.data; index as i"> -->
-            <tr data-toggle="modal" data-target="#exampleModal">
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            <tr>
-              <th scope="row">Placeholder</th>
-              <td colspan="2">Placeholder</td>
-              <td>Placeholder</td>
-              <td>Placeholder</td>
-            </tr>
-            
-          </tbody>
-        </table>
-        <!-- </div> -->
-        <!-- <div class="buttons">
-                  <a class="btn btn-primary" >Logout</a>
-              </div> -->
+      </nav>
+      <!-- Sidebar -->
       </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div id = "container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="ticketID">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.ticketID}} </td>
+        </ng-container>
+        <ng-container matColumnDef="assignee">
+          <th mat-header-cell *matHeaderCellDef> Assignee </th>
+          <td mat-cell *matCellDef="let element"> {{element.assignee.userFName}} {{element.assignee.userLName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="tracker">
+          <th mat-header-cell *matHeaderCellDef> Tracker </th>
+          <td mat-cell *matCellDef="let element"> {{element.tracker.typeName }} </td>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status.statusName }} </td>
+        </ng-container>
+        <ng-container matColumnDef="subject">
+          <th mat-header-cell *matHeaderCellDef> Subject </th>
+          <td mat-cell *matCellDef="let element"> {{element.subject }} </td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.status.statusName }} </td>
+        </ng-container>
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef> Update </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="accent"  (click) ="update(element)">
+                  <mat-icon class="mat-18">system_update</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef > Delete </th>
+              <td mat-cell *matCellDef="let element" (click) ="delete(element)">
+                <button mat-icon-button color="warn" >
+                    <mat-icon class="mat-18">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </div>
-  </div>
-  
-  
-  </div>
+    </mat-drawer-content>
+</mat-drawer-container>
