@@ -42,11 +42,9 @@
                 placeholder="Assignee ID"
               />
             </div>
-            <datalist id="assignee">
-              <option value="Saturnina Alvarez">
-              <option value="Rejine Alquisa">
-              <option value="Pelisa Jane Ligalig">
-              <!-- ... -->
+            <datalist id="assignee" > -->
+              <option *ngFor="let assignee of assignees; index as i;" value="{{assignee.userID}}">{{assignee.userFName}} {{assignee.userLName}}</option> 
+              
             </datalist>
             <div class="clear">&nbsp;</div>
             <div class="left">

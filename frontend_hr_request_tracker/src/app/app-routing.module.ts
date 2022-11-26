@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminHomeComponent } from './screens/admin-screens/home-ticket-admin/admin-home/admin-home.component';
 import { CreateTicketComponent } from './screens/create-ticket/create-ticket.component';
 import { LandingpageComponent } from './screens/landing-page/landingpage/landingpage.component';
 import { LoginComponent } from './screens/login/login/login.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
     component: LandingpageComponent
   },
   {
-    path: 'new',
+    path: 'createticket',
     component: CreateTicketComponent
   },
   {
@@ -30,8 +31,14 @@ const routes: Routes = [
   {
     path: 'viewticket',
     component: ViewticketComponent
+  },
+  {
+    path: 'admin',
+    component: AdminHomeComponent
   }
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
