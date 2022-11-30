@@ -9,6 +9,7 @@ import { RegisterComponent } from './screens/register/register/register.componen
 import { UserHomeComponent } from './screens/user-screens/home-ticket-user/user-home/user-home.component';
 import { AdminHomeComponent } from './screens/admin-screens/home-ticket-admin/admin-home/admin-home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { ViewticketComponent } from './screens/viewticket/viewticket.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,7 +19,8 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
-
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     BrowserAnimationsModule,
     MatTableModule,
     MatIconModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule,
+    ReactiveFormsModule
 
   ],
   providers: [],
