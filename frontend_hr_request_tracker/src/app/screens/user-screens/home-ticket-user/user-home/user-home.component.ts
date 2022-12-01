@@ -12,6 +12,7 @@ import { QueryService } from 'src/app/services/query.service';
   styleUrls: ['./user-home.component.scss']
 })
 export class UserHomeComponent implements OnInit {
+  showFiller = false;
   public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'description', 'createdAt', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Ticket>;
   tickets: any = [];

@@ -78,7 +78,7 @@ nav a:hover{
 
 .button-nav-container{
     
-    width: 20%;
+    width: 40%;
     display:flex;
     justify-content: end;
     button{
@@ -154,7 +154,7 @@ h3{
     opacity: 0;
     filter:blur(5px);
     transform: translateY(-100%);
-    transition: all 950ms;
+    transition: all 1500ms;
    
 }
 
