@@ -39,6 +39,17 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTicketTypes)
   }
 
+  public createTicketType(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createTicketType, data);
+  }
+  public updateTicketType(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.updateTicketType, data);
+  }
+
+  public deleteTicketType(id: string) {
+    return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteTicketType + id);
+  }
+
   //USER REQUESTS
   public getUserInfo(id:string){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userInfo + id);
@@ -46,6 +57,18 @@ export class QueryService {
 
   public getAllUsers(){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allUsers);
+  }
+
+  public createUser(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createUser, data);
+  }
+
+  public updateUser(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.updateUser, data);
+  }
+
+  public deleteUser(id: string) {
+    return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteUser + id);
   }
 
   //STATUS REQUESTS
@@ -59,6 +82,18 @@ export class QueryService {
   //ROLE REQUESTS
   public getAllRoles() {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allRoles);
+  }
+
+  public createRole(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createRole, data);
+  }
+
+  public updateRole(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.updateRole, data);
+  }
+
+  public deleteRole(id: string) {
+    return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteRole + id);
   }
   
 
