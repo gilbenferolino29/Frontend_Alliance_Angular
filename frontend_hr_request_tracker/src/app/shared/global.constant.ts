@@ -25,16 +25,16 @@ export class GlobalConstants {
         //GET
     public static ticketTypeInfo = "tickets-type/";
     public static allTicketTypes = "ticket-types/";
-    public static createTicketType = "ticket-types/create";
-    public static updateTicketType = "ticket-types/update";
-    public static deleteTicketType = "ticket-types/delete";
+    public static createTicketType = "ticket-types/create/";
+    public static updateTicketType = "ticket-types/update/";
+    public static deleteTicketType = "ticket-types/delete/";
     
     //USER URLS
         //GET
     public static userInfo = "user/";
     public static allUsers = "users/";
     public static createUser = "users/create/";
-    public static updateUser = "users/update.";
+    public static updateUser = "users/update/";
     public static deleteUser = "users/delete/"
 
     //STATUS URLS

@@ -36,6 +36,7 @@ import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracke
 import { HomeUserComponent } from './screens/users/home-user/home-user.component';
 import { HomeRoleComponent } from './screens/roles/home-role/home-role.component';
 import { CreateRoleComponent } from './screens/roles/create-role/create-role.component';
+import { UpdateRoleComponent } from './screens/roles/update-role/update-role.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,8 @@ import { CreateRoleComponent } from './screens/roles/create-role/create-role.com
     HomeTrackerComponent,
     HomeUserComponent,
     HomeRoleComponent,
-    CreateRoleComponent
+    CreateRoleComponent,
+    UpdateRoleComponent
   ],
   imports: [
     BrowserModule,

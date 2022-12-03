@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { Role } from 'src/app/models/Role';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateRoleComponent } from '../create-role/create-role.component';
+import { UpdateRoleComponent } from '../update-role/update-role.component';
 
 @Component({
   selector: 'app-home-role',
@@ -37,6 +38,22 @@ export class HomeRoleComponent implements OnInit {
 
   openDialogCreate() {
     const dialogRef = this.dialog.open(CreateRoleComponent, {
+      height: '350px',
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        window.location.reload();
+      }
+    });
+  }
+
+  openDialogUpdate(role: Role) {
+    const dialogRef = this.dialog.open(UpdateRoleComponent, {
+      data: {
+        role: role,
+      },
       height: '350px',
       width: '250px',
     });
