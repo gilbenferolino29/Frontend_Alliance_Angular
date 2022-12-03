@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { TicketType } from 'src/app/models/ITicketType';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateTrackerComponent } from '../create-tracker/create-tracker.component';
+import { UpdateTrackerComponent } from '../update-tracker/update-tracker.component';
 
 @Component({
   selector: 'app-home-tracker',
@@ -25,7 +26,6 @@ export class HomeTrackerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.populate();
-    console.log(this.dataSource.data);
   }
 
   nav(destination: string) {
@@ -38,6 +38,22 @@ export class HomeTrackerComponent implements OnInit {
 
   openDialogCreate() {
     const dialogRef = this.dialog.open(CreateTrackerComponent, {
+      height: '250px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        window.location.reload();
+      }
+    });
+  }
+
+  openDialogUpdate(tracker: TicketType) {
+    const dialogRef = this.dialog.open(UpdateTrackerComponent, {
+      data: {
+        tracker: tracker,
+      },
       height: '250px',
       width: '800px',
     });
