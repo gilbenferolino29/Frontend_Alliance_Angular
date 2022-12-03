@@ -22,6 +22,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
+import { DeleteTicketComponent } from './screens/user-screens/delete-ticket/delete-ticket.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import {MatButtonModule} from '@angular/material/button';
     UserHomeComponent,
     AdminHomeComponent,
     ViewticketComponent,
-    CreateTicketComponent
+    CreateTicketComponent,
+    DeleteTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -47,8 +50,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
-    MatButtonModule
-
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
