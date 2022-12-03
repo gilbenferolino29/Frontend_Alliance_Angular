@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { TicketType } from 'src/app/models/ITicketType';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateTrackerComponent } from '../create-tracker/create-tracker.component';
+import { DeleteTrackerComponent } from '../delete-tracker/delete-tracker.component';
 import { UpdateTrackerComponent } from '../update-tracker/update-tracker.component';
 
 @Component({
@@ -61,6 +62,22 @@ export class HomeTrackerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+      }
+    });
+  }
+
+  openDialogDelete(tracker: TicketType) {
+    const dialogRef = this.dialog.open(DeleteTrackerComponent, {
+      data: {
+        tracker: tracker
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        const index = this.dataSource.data.findIndex(x => x.ticketTypeID === tracker.ticketTypeID);
+        this.dataSource.data.splice(index,1)
+        this.dataSource._updateChangeSubscription();
       }
     });
   }

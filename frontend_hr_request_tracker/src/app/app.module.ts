@@ -40,6 +40,7 @@ import { UpdateRoleComponent } from './screens/roles/update-role/update-role.com
 import { DeleteRoleComponent } from './screens/roles/delete-role/delete-role.component';
 import { CreateTrackerComponent } from './screens/tracker/create-tracker/create-tracker.component';
 import { UpdateTrackerComponent } from './screens/tracker/update-tracker/update-tracker.component';
+import { DeleteTrackerComponent } from './screens/tracker/delete-tracker/delete-tracker.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,8 @@ import { UpdateTrackerComponent } from './screens/tracker/update-tracker/update-
     UpdateRoleComponent,
     DeleteRoleComponent,
     CreateTrackerComponent,
-    UpdateTrackerComponent
+    UpdateTrackerComponent,
+    DeleteTrackerComponent
   ],
   imports: [
     BrowserModule,
