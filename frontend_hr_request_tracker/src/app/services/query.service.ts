@@ -45,7 +45,7 @@ export class QueryService {
   }
 
   public getAllUsers(){
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allUsers );
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allUsers);
   }
 
   //STATUS REQUESTS
@@ -54,6 +54,11 @@ export class QueryService {
   }
   public getAllStatus(){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allStatus);
+  }
+
+  //ROLE REQUESTS
+  public getAllRoles() {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allRoles);
   }
   
 

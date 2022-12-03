@@ -25,14 +25,27 @@ export class GlobalConstants {
         //GET
     public static ticketTypeInfo = "tickets-type/";
     public static allTicketTypes = "ticket-types/";
+    public static createTicketType = "ticket-types/create";
+    public static updateTicketType = "ticket-types/update";
+    public static deleteTicketType = "ticket-types/delete";
     
     //USER URLS
         //GET
     public static userInfo = "user/";
     public static allUsers = "users/";
+    public static createUser = "users/create/";
+    public static updateUser = "users/update.";
+    public static deleteUser = "users/delete/"
 
     //STATUS URLS
         //GET
     public static statusInfo = "status/";
     public static allStatus = "status/";
+
+    //ROLE URLS
+        //GET
+    public static allRoles = "roles/";
+    public static createRole = "roles/create/";
+    public static updateRole = "roles/update/";
+    public static deleteRole = "roles/delete/";
 }
