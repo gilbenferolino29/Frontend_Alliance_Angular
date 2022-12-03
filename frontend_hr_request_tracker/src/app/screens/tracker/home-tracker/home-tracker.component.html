@@ -1,0 +1,63 @@
+<mat-drawer-container class="container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side" opened="true">
+      <div class="side-container">
+        <div id="profile">
+          <img src="assets/pp.jpg" alt="">
+          <h2>Welcome User</h2>
+        </div>
+  
+      </div>
+    </mat-drawer>
+  
+      <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()">
+          Toggle sidenav
+        </button>
+      </div>
+  
+      <h1 class="container-header">Tracker List</h1>
+      <mat-divider></mat-divider>
+  
+      <div class="demo-button-container">
+        <button mat-raised-button color="primary">
+          Add Tracker
+        </button>
+      </div>
+  
+      <div id="table-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="tracker">
+            <th mat-header-cell *matHeaderCellDef> Tracker </th>
+            <td mat-cell *matCellDef="let element"> {{element.typeName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="defaultAssignee">
+            <th mat-header-cell *matHeaderCellDef> Default Assignee </th>
+            <td mat-cell *matCellDef="let element"> {{ element.defaultAssignee[0].userFName }} {{element.defaultAssignee[0].userLName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let element"> {{ element.description }} </td>
+          </ng-container>
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef> Update </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="accent">
+                <mat-icon class="mat-18">system_update</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> Delete </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="warn">
+                <mat-icon class="mat-18">delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+  
+  </mat-drawer-container>

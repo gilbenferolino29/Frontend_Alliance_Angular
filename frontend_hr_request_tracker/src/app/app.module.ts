@@ -32,6 +32,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { CreateTicketComponentDialog } from './screens/user-screens/create-ticket/create-ticket.component';
 import { ViewTicketComponent } from './screens/user-screens/view-ticket/view-ticket.component';
 import { MatListModule } from '@angular/material/list';
+import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracker.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { MatListModule } from '@angular/material/list';
     DeleteTicketComponent,
     UpdateTicketComponent,
     CreateTicketComponentDialog,
-    ViewTicketComponent
+    ViewTicketComponent,
+    HomeTrackerComponent
   ],
   imports: [
     BrowserModule,
