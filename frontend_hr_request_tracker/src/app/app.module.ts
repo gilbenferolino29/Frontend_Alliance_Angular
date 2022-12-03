@@ -33,6 +33,7 @@ import { CreateTicketComponentDialog } from './screens/user-screens/create-ticke
 import { ViewTicketComponent } from './screens/user-screens/view-ticket/view-ticket.component';
 import { MatListModule } from '@angular/material/list';
 import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracker.component';
+import { HomeUserComponent } from './screens/users/home-user/home-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracke
     UpdateTicketComponent,
     CreateTicketComponentDialog,
     ViewTicketComponent,
-    HomeTrackerComponent
+    HomeTrackerComponent,
+    HomeUserComponent
   ],
   imports: [
     BrowserModule,

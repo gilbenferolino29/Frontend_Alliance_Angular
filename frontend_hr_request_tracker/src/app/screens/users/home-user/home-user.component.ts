@@ -3,22 +3,21 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { TicketType } from 'src/app/models/ITicketType';
+import { User } from 'src/app/models/IUser';
 import { QueryService } from 'src/app/services/query.service';
 
 @Component({
-  selector: 'app-home-tracker',
-  templateUrl: './home-tracker.component.html',
-  styleUrls: ['./home-tracker.component.scss']
+  selector: 'app-home-user',
+  templateUrl: './home-user.component.html',
+  styleUrls: ['./home-user.component.scss']
 })
-export class HomeTrackerComponent implements OnInit {
-  showFiller = false;
-  public displayedColumns = ['tracker', 'defaultAssignee', 'description', 'update', 'delete'];
-  public dataSource = new MatTableDataSource<TicketType>;
-  ticketTypes: any = [];
+export class HomeUserComponent implements OnInit {
+  public displayedColumns = ['username', 'role', 'name', 'email', 'update', 'delete'];
+  public dataSource = new MatTableDataSource<User>;
+  users: any = [];
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private queryService: QueryService,
     public dialog: MatDialog) { }
 
@@ -31,7 +30,7 @@ export class HomeTrackerComponent implements OnInit {
   }
 
   async populate() {
-    this.dataSource.data = await firstValueFrom(this.queryService.getAllTicketTypes()) as TicketType[];
+    this.dataSource.data = await firstValueFrom(this.queryService.getAllUsers()) as User[];
   }
 
 }

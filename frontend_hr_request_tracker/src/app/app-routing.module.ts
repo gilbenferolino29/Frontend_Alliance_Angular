@@ -6,6 +6,7 @@ import { LandingpageComponent } from './screens/landing-page/landingpage/landing
 import { LoginComponent } from './screens/login/login/login.component';
 import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracker.component';
 import { UserHomeComponent } from './screens/user-screens/home-ticket-user/user-home/user-home.component';
+import { HomeUserComponent } from './screens/users/home-user/home-user.component';
 import { ViewticketComponent } from './screens/viewticket/viewticket.component';
 
 const routes: Routes = [
@@ -26,7 +27,7 @@ const routes: Routes = [
     component: CreateTicketComponent
   },
   {
-    path: 'ticketlist',
+    path: 'tickets',
     component: UserHomeComponent
   },
   {
@@ -40,7 +41,11 @@ const routes: Routes = [
   {
     path: 'trackers',
     component: HomeTrackerComponent
-  }
+  },
+  {
+    path: 'users',
+    component: HomeUserComponent
+  },
 ];
 
 
