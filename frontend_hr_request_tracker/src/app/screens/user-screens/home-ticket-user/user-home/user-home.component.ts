@@ -8,6 +8,7 @@ import { QueryService } from 'src/app/services/query.service';
 import { CreateTicketComponentDialog } from '../../create-ticket/create-ticket.component';
 import { DeleteTicketComponent } from '../../delete-ticket/delete-ticket.component';
 import { UpdateTicketComponent } from '../../update-ticket/update-ticket.component';
+import { ViewTicketComponent } from '../../view-ticket/view-ticket.component';
 
 
 @Component({
@@ -17,7 +18,7 @@ import { UpdateTicketComponent } from '../../update-ticket/update-ticket.compone
 })
 export class UserHomeComponent implements OnInit {
   showFiller = false;
-  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'description', 'createdAt', 'update', 'delete'];
+  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'description', 'createdAt', 'view', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Ticket>;
   tickets: any = [];
 
@@ -51,6 +52,16 @@ export class UserHomeComponent implements OnInit {
       if(result == true) {
         window.location.reload();
       }
+    });
+  }
+
+  openDialogView(ticket: Ticket) {
+    this.dialog.open(ViewTicketComponent, {
+      data: {
+        ticket: ticket,
+      },
+      height: '350px',
+      width: '800px',
     });
   }
 

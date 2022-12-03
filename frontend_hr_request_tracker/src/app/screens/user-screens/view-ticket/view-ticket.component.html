@@ -1,0 +1,50 @@
+<h1 mat-dialog-title>{{ data['ticket'].subject }}</h1>
+<div mat-dialog-content>
+    <mat-grid-list cols="3" rowHeight="3:1">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Assignee</mat-label>
+                <mat-select [(value)]="data['ticket'].assignee.userID">
+                    <mat-option [value]="data['ticket'].assignee.userID">
+                        {{ data['ticket'].assignee.userFName }} {{ data['ticket'].assignee.userLName }}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Tracker</mat-label>
+                <mat-select [(ngModel)]="data['ticket'].tracker.ticketTypeID">
+                    <mat-option [value]="data['ticket'].tracker.ticketTypeID">
+                        {{ data['ticket'].tracker.typeName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput [(ngModel)]="data['ticket'].description" [readonly]="true">
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Status</mat-label>
+                <mat-select [(ngModel)]="data['ticket'].status.statusID">
+                    <mat-option [value]="data['ticket'].status.statusID">
+                        {{ data['ticket'].status.statusName }}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Created At</mat-label>
+                <input matInput [(ngModel)]="data['ticket'].createdAt" [readonly]="true">
+              </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Back</button>
+</div>

@@ -30,6 +30,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { CreateTicketComponentDialog } from './screens/user-screens/create-ticket/create-ticket.component';
+import { ViewTicketComponent } from './screens/user-screens/view-ticket/view-ticket.component';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { CreateTicketComponentDialog } from './screens/user-screens/create-ticke
     CreateTicketComponent,
     DeleteTicketComponent,
     UpdateTicketComponent,
-    CreateTicketComponentDialog
+    CreateTicketComponentDialog,
+    ViewTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ import { CreateTicketComponentDialog } from './screens/user-screens/create-ticke
     MatGridListModule,
     MatSelectModule,
     MatOptionModule,
-    MatDividerModule
+    MatDividerModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
