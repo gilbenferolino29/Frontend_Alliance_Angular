@@ -55,7 +55,7 @@
 }
 
 #table-container{
-  padding: 3rem 3rem 3rem 3rem;
+  padding: 1.5rem 3rem 3rem 3rem;
   height:100%;
   //border:1px solid magenta;
 }
@@ -110,4 +110,16 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
+}
+
+.demo-button-container {
+  margin-left: 3%;
+  margin-top: 1%;
+}
+
+.container-header {
+  margin-left: 3%;
+  margin-top: 2%;
+  font-weight: 500;
+  font-size: 24pt;
 }

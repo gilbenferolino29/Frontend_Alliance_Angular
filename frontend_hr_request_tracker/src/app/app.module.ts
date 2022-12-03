@@ -28,6 +28,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { UpdateTicketComponent } from './screens/user-screens/update-ticket/update-ticket.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,8 @@ import { MatOptionModule } from '@angular/material/core';
     MatDialogModule,
     MatGridListModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
