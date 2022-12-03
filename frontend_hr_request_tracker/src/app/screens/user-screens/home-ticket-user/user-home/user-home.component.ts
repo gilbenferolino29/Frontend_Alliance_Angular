@@ -18,7 +18,7 @@ import { ViewTicketComponent } from '../../view-ticket/view-ticket.component';
 })
 export class UserHomeComponent implements OnInit {
   showFiller = false;
-  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'description', 'createdAt', 'view', 'update', 'delete'];
+  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'subject', 'description', 'status', 'createdAt', 'view', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Ticket>;
   tickets: any = [];
 
