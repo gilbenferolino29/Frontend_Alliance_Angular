@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/models/IUser';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { UpdateUserComponent } from '../update-user/update-user.component';
 
 @Component({
   selector: 'app-home-user',
@@ -36,6 +37,22 @@ export class HomeUserComponent implements OnInit {
 
   openDialogCreate() {
     const dialogRef = this.dialog.open(CreateUserComponent, {
+      height: '350px',
+      width: '800px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        window.location.reload();
+      }
+    });
+  }
+
+  openDialogUpdate(user: User) {
+    const dialogRef = this.dialog.open(UpdateUserComponent, {
+      data: {
+        user: user,
+      },
       height: '350px',
       width: '800px'
     });

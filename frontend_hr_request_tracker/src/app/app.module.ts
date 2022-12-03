@@ -42,6 +42,7 @@ import { CreateTrackerComponent } from './screens/tracker/create-tracker/create-
 import { UpdateTrackerComponent } from './screens/tracker/update-tracker/update-tracker.component';
 import { DeleteTrackerComponent } from './screens/tracker/delete-tracker/delete-tracker.component';
 import { CreateUserComponent } from './screens/users/create-user/create-user.component';
+import { UpdateUserComponent } from './screens/users/update-user/update-user.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,7 +66,8 @@ import { CreateUserComponent } from './screens/users/create-user/create-user.com
     CreateTrackerComponent,
     UpdateTrackerComponent,
     DeleteTrackerComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,

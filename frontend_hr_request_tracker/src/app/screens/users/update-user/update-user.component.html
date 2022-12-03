@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Update User</h1>
+<div mat-dialog-content>
+    <mat-grid-list cols="3" rowHeight="3:1">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput [(ngModel)]="data['user'].username" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput [(ngModel)]="data['user'].userFName" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput [(ngModel)]="data['user'].userLName" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="data['user'].userEmail" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput [(ngModel)]="data['user'].userPassword" required [readonly]="true">
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Role</mat-label>
+                <mat-select [(ngModel)]="data['user'].userRole.roleID" required>
+                    <mat-option *ngFor="let role of roleList" [value]="role.roleID" (onSelectionChange)="selectRole(role, $event)">
+                        {{ role.roleName }}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Back</button>
+  <button mat-button (click)="updateUser(data['user'])">Update</button>
