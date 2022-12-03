@@ -29,6 +29,7 @@ import { UpdateTicketComponent } from './screens/user-screens/update-ticket/upda
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { CreateTicketComponentDialog } from './screens/user-screens/create-ticket/create-ticket.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,8 @@ import { MatDividerModule } from '@angular/material/divider';
     ViewticketComponent,
     CreateTicketComponent,
     DeleteTicketComponent,
-    UpdateTicketComponent
+    UpdateTicketComponent,
+    CreateTicketComponentDialog
   ],
   imports: [
     BrowserModule,

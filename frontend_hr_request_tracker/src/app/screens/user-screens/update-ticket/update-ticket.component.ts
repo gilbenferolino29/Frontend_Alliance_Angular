@@ -17,10 +17,8 @@ export class UpdateTicketComponent implements OnInit {
   statusList: any = [];
   assigneeList: any = [];
 
-  ticketLoad: any;
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  private queryService: QueryService, public dialogRef: MatDialogRef<UpdateTicketComponent>) { }
+    private queryService: QueryService, public dialogRef: MatDialogRef<UpdateTicketComponent>) { }
 
   async ngOnInit(): Promise<void> {
     await this.populate();

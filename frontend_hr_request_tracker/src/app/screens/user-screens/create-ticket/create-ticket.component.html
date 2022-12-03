@@ -1,16 +1,10 @@
-<h1 mat-dialog-title>Update Ticket</h1>
+<h1 mat-dialog-title>Create Ticket</h1>
 <div mat-dialog-content>
     <mat-grid-list cols="3" rowHeight="3:1">
         <mat-grid-tile>
             <mat-form-field appearance="fill">
-                <mat-label>Ticket ID</mat-label>
-                <input matInput [(ngModel)]="data['ticket'].ticketID" disabled>
-              </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile>
-            <mat-form-field appearance="fill">
                 <mat-label>Assignee</mat-label>
-                <mat-select [(ngModel)]="data['ticket'].assignee.userID">
+                <mat-select [(ngModel)]="assignee" required>
                     <mat-option *ngFor="let assignee of assigneeList" [value]="assignee.userID" (onSelectionChange)="selectAssignee(assignee, $event)">
                         {{ assignee.userFName }} {{ assignee.userLName }}
                     </mat-option>
@@ -20,7 +14,7 @@
         <mat-grid-tile>
             <mat-form-field appearance="fill">
                 <mat-label>Tracker</mat-label>
-                <mat-select [(ngModel)]="data['ticket'].tracker.ticketTypeID">
+                <mat-select [(ngModel)]="tracker" required>
                     <mat-option *ngFor="let tracker of trackerList" [value]="tracker.ticketTypeID" (onSelectionChange)="selectTracker(tracker, $event)">
                         {{ tracker.typeName }}
                     </mat-option>
@@ -30,19 +24,19 @@
         <mat-grid-tile>
             <mat-form-field appearance="fill">
                 <mat-label>Subject</mat-label>
-                <input matInput [(ngModel)]="data['ticket'].subject">
+                <input matInput [(ngModel)]="subject" required>
               </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>
             <mat-form-field appearance="fill">
                 <mat-label>Description</mat-label>
-                <input matInput [(ngModel)]="data['ticket'].description">
+                <input matInput [(ngModel)]="description">
               </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>
             <mat-form-field appearance="fill">
                 <mat-label>Status</mat-label>
-                <mat-select [(ngModel)]="data['ticket'].status.statusID">
+                <mat-select [(ngModel)]="status" required>
                     <mat-option *ngFor="let status of statusList" [value]="status.statusID" (onSelectionChange)="selectStatus(status, $event)">
                         {{ status.statusName }}
                     </mat-option>
@@ -53,5 +47,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Back</button>
-  <button mat-button mat-dialog-close (click)="updateTicket(data['ticket'])">Update</button>
+  <button mat-button (click)="createTicket()">Create</button>
 </div>
