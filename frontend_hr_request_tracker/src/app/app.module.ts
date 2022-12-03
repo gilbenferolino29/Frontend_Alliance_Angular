@@ -35,6 +35,7 @@ import { MatListModule } from '@angular/material/list';
 import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracker.component';
 import { HomeUserComponent } from './screens/users/home-user/home-user.component';
 import { HomeRoleComponent } from './screens/roles/home-role/home-role.component';
+import { CreateRoleComponent } from './screens/roles/create-role/create-role.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,8 @@ import { HomeRoleComponent } from './screens/roles/home-role/home-role.component
     ViewTicketComponent,
     HomeTrackerComponent,
     HomeUserComponent,
-    HomeRoleComponent
+    HomeRoleComponent,
+    CreateRoleComponent
   ],
   imports: [
     BrowserModule,
