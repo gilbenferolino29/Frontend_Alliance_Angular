@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { Role } from 'src/app/models/Role';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateRoleComponent } from '../create-role/create-role.component';
+import { DeleteRoleComponent } from '../delete-role/delete-role.component';
 import { UpdateRoleComponent } from '../update-role/update-role.component';
 
 @Component({
@@ -61,6 +62,22 @@ export class HomeRoleComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+      }
+    });
+  }
+
+  openDialogDelete(role: Role) {
+    const dialogRef = this.dialog.open(DeleteRoleComponent, {
+      data: {
+        role: role,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        const index = this.dataSource.data.findIndex(x => x.roleID === role.roleID);
+        this.dataSource.data.splice(index,1)
+        this.dataSource._updateChangeSubscription();
       }
     });
   }

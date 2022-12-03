@@ -37,6 +37,7 @@ import { HomeUserComponent } from './screens/users/home-user/home-user.component
 import { HomeRoleComponent } from './screens/roles/home-role/home-role.component';
 import { CreateRoleComponent } from './screens/roles/create-role/create-role.component';
 import { UpdateRoleComponent } from './screens/roles/update-role/update-role.component';
+import { DeleteRoleComponent } from './screens/roles/delete-role/delete-role.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +56,8 @@ import { UpdateRoleComponent } from './screens/roles/update-role/update-role.com
     HomeUserComponent,
     HomeRoleComponent,
     CreateRoleComponent,
-    UpdateRoleComponent
+    UpdateRoleComponent,
+    DeleteRoleComponent
   ],
   imports: [
     BrowserModule,
