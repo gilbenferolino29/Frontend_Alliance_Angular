@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Create User</h1>
+<div mat-dialog-content>
+    <mat-grid-list cols="3" rowHeight="3:1">
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput [(ngModel)]="username" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput [(ngModel)]="userFName" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput [(ngModel)]="userLName" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]="userEmail" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput [(ngModel)]="userPassword" required>
+              </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="fill">
+                <mat-label>Role</mat-label>
+                <mat-select [(ngModel)]="userRole" required>
+                    <mat-option *ngFor="let role of roleList" [value]="role.roleID" (onSelectionChange)="selectRole(role, $event)">
+                        {{ role.roleName }}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Back</button>
+  <button mat-button (click)="createUser()">Create</button>
+</div>

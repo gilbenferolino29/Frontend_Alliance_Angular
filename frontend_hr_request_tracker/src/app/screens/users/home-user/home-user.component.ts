@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/models/IUser';
 import { QueryService } from 'src/app/services/query.service';
+import { CreateUserComponent } from '../create-user/create-user.component';
 
 @Component({
   selector: 'app-home-user',
@@ -31,6 +32,19 @@ export class HomeUserComponent implements OnInit {
 
   async populate() {
     this.dataSource.data = await firstValueFrom(this.queryService.getAllUsers()) as User[];
+  }
+
+  openDialogCreate() {
+    const dialogRef = this.dialog.open(CreateUserComponent, {
+      height: '350px',
+      width: '800px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        window.location.reload();
+      }
+    });
   }
 
 }
