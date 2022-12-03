@@ -24,6 +24,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import { DeleteTicketComponent } from './screens/user-screens/delete-ticket/delete-ticket.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { UpdateTicketComponent } from './screens/user-screens/update-ticket/update-ticket.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     AdminHomeComponent,
     ViewticketComponent,
     CreateTicketComponent,
-    DeleteTicketComponent
+    DeleteTicketComponent,
+    UpdateTicketComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

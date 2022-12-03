@@ -35,7 +35,7 @@ export class QueryService {
   public getTicketTypeInfo(id:string){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.ticketTypeInfo + id);
   }
-  public getAllTicketTypes(id:string){
+  public getAllTicketTypes(){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTicketTypes)
   }
 
@@ -52,7 +52,7 @@ export class QueryService {
   public getStatusInfo(id:string){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.statusInfo + id);
   }
-  public getAllStatus(id:string){
+  public getAllStatus(){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allStatus);
   }
   

@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { Ticket } from 'src/app/models/ITicket';
 import { QueryService } from 'src/app/services/query.service';
 import { DeleteTicketComponent } from '../../delete-ticket/delete-ticket.component';
+import { UpdateTicketComponent } from '../../update-ticket/update-ticket.component';
 
 
 @Component({
@@ -39,9 +40,20 @@ export class UserHomeComponent implements OnInit {
     this.dataSource.data = await firstValueFrom(this.queryService.getAllTickets()) as Ticket[]; 
   }
 
-   update(ticket: Ticket) {
-    this.queryService.updateTicket(ticket);
-    window.location.reload();
+  openDialogUpdate(ticket: Ticket) {
+    const dialogRef = this.dialog.open(UpdateTicketComponent, {
+      data: {
+        ticket: ticket,
+      },
+      height: '350px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        window.location.reload();
+      }
+    });
   }
 
   openDialogDelete(ticket: Ticket) {
