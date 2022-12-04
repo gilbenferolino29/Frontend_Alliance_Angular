@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/models/IUser';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { DeleteUserComponent } from '../delete-user/delete-user.component';
 import { UpdateUserComponent } from '../update-user/update-user.component';
 
 @Component({
@@ -60,6 +61,22 @@ export class HomeUserComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+      }
+    });
+  }
+
+  openDialogDelete(user: User) {
+    const dialogRef = this.dialog.open(DeleteUserComponent, {
+      data: {
+        user: user,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true) {
+        const index = this.dataSource.data.findIndex(x => x.userID === user.userID);
+        this.dataSource.data.splice(index,1)
+        this.dataSource._updateChangeSubscription();
       }
     });
   }
