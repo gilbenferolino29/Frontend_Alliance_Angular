@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -22,7 +23,8 @@ export class HomeUserComponent implements OnInit {
   constructor(
     private router: Router,
     private queryService: QueryService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private _snackbar: MatSnackBar) { }
 
   async ngOnInit(): Promise<void> {
     await this.populate();
@@ -45,6 +47,7 @@ export class HomeUserComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+        this.openSnackbar('User created.', 'Dismiss');
       }
     });
   }
@@ -61,6 +64,7 @@ export class HomeUserComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+        this.openSnackbar('User updated.', 'Dismiss');
       }
     });
   }
@@ -77,7 +81,14 @@ export class HomeUserComponent implements OnInit {
         const index = this.dataSource.data.findIndex(x => x.userID === user.userID);
         this.dataSource.data.splice(index,1)
         this.dataSource._updateChangeSubscription();
+        this.openSnackbar('User deleted.', 'Dismiss');
       }
+    });
+  }
+
+  openSnackbar(message: string, action: string) {
+    this._snackbar.open(message, action, {
+      duration: 3000
     });
   }
 

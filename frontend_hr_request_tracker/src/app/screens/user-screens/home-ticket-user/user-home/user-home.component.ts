@@ -9,7 +9,7 @@ import { CreateTicketComponentDialog } from '../../create-ticket/create-ticket.c
 import { DeleteTicketComponent } from '../../delete-ticket/delete-ticket.component';
 import { UpdateTicketComponent } from '../../update-ticket/update-ticket.component';
 import { ViewTicketComponent } from '../../view-ticket/view-ticket.component';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home',
@@ -26,6 +26,7 @@ export class UserHomeComponent implements OnInit {
     private router: Router,
     private queryService: QueryService,
     public dialog: MatDialog, 
+    private _snackbar: MatSnackBar
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -51,6 +52,7 @@ export class UserHomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+        this.openSnackbar('Ticket created.', 'Dismiss');
       }
     });
   }
@@ -77,6 +79,7 @@ export class UserHomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+        this.openSnackbar('Ticket updated.', 'Dismiss');
       }
     });
   }
@@ -93,7 +96,15 @@ export class UserHomeComponent implements OnInit {
         const index = this.dataSource.data.findIndex(x => x.ticketID === ticket.ticketID);
         this.dataSource.data.splice(index,1)
         this.dataSource._updateChangeSubscription();
+
+        this.openSnackbar('Ticket deleted.', 'Dismiss');
       }
+    });
+  }
+
+  openSnackbar(message: string, action: string) {
+    this._snackbar.open(message, action, {
+      duration: 3000
     });
   }
 

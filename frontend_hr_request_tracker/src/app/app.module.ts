@@ -44,6 +44,7 @@ import { DeleteTrackerComponent } from './screens/tracker/delete-tracker/delete-
 import { CreateUserComponent } from './screens/users/create-user/create-user.component';
 import { UpdateUserComponent } from './screens/users/update-user/update-user.component';
 import { DeleteUserComponent } from './screens/users/delete-user/delete-user.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +93,7 @@ import { DeleteUserComponent } from './screens/users/delete-user/delete-user.com
     MatOptionModule,
     MatDividerModule,
     MatListModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

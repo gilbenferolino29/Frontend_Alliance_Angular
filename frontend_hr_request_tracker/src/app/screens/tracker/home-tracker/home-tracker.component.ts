@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
@@ -23,7 +24,8 @@ export class HomeTrackerComponent implements OnInit {
   constructor(
     private router: Router, 
     private queryService: QueryService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private _snackbar: MatSnackBar) { }
 
   async ngOnInit(): Promise<void> {
     await this.populate();
@@ -46,6 +48,7 @@ export class HomeTrackerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+        this.openSnackbar('Tracker created.', 'Dismiss');
       }
     });
   }
@@ -62,6 +65,7 @@ export class HomeTrackerComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result == true) {
         window.location.reload();
+        this.openSnackbar('Tracker updated.', 'Dismiss');
       }
     });
   }
@@ -78,7 +82,15 @@ export class HomeTrackerComponent implements OnInit {
         const index = this.dataSource.data.findIndex(x => x.ticketTypeID === tracker.ticketTypeID);
         this.dataSource.data.splice(index,1)
         this.dataSource._updateChangeSubscription();
+
+        this.openSnackbar('Tracker deleted.', 'Dismiss');
       }
+    });
+  }
+
+  openSnackbar(message: string, action: string) {
+    this._snackbar.open(message, action, {
+      duration: 3000
     });
   }
 
