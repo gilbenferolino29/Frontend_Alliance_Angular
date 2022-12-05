@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
     email: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
-  emailFormControl = new FormControl('', [Validators.required]);
+  
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -40,17 +40,21 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let formData: FormData = new FormData();
+    if(this.form.valid) {
+      let formData: FormData = new FormData();
 
-    formData.append('username', this.f.email.value != null ? this.f.email.value.toString() : '');
-    formData.append('password', this.f.password.value != null ? this.f.password.value.toString() : '');
-
-    this.queryService.login(formData).subscribe((res: any) => {
-      if(res.status === "SUCCESS") {
-        // ROUTE HERE OR ENABLE AUTHGUARD
-        this.router.navigate(['tickets']);
-      }
-    });
+      formData.append('username', this.f.email.value != null ? this.f.email.value.toString() : '');
+      formData.append('password', this.f.password.value != null ? this.f.password.value.toString() : '');
+  
+      this.queryService.login(formData).subscribe((res: any) => {
+        if(res.status === "SUCCESS") {
+          // ROUTE HERE OR ENABLE AUTHGUARD
+          this.router.navigate(['tickets']);
+        }
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
 }
