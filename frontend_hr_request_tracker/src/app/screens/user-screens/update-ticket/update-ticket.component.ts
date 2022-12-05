@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { Status } from 'src/app/models/IStatus';
@@ -17,8 +18,20 @@ export class UpdateTicketComponent implements OnInit {
   statusList: any = [];
   assigneeList: any = [];
 
+  form = this.fb.group({
+    ticketID: [{value: this.data['ticket'].ticketID, disabled: true}, [Validators.required]],
+    subject: [this.data['ticket'].subject, [Validators.required]],
+    description: [this.data['ticket'].description],
+    assignee: [this.data['ticket'].assignee.userID, [Validators.required]],
+    tracker: [this.data['ticket'].tracker.ticketTypeID, [Validators.required]],
+    status: [this.data['ticket'].status.statusID, [Validators.required]]
+  });
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-    private queryService: QueryService, public dialogRef: MatDialogRef<UpdateTicketComponent>) { }
+    private queryService: QueryService, 
+    public dialogRef: MatDialogRef<UpdateTicketComponent>,
+    private fb: FormBuilder
+    ) { }
 
   async ngOnInit(): Promise<void> {
     await this.populate();
@@ -31,19 +44,23 @@ export class UpdateTicketComponent implements OnInit {
   }
 
   updateTicket(ticket: Ticket) {
-    let formData: FormData = new FormData();
-    let createdAt = ticket.createdAt[0] + '-' + String(ticket.createdAt[1]).padStart(2, '0') + '-' + String(ticket.createdAt[2]).padStart(2, '0');
-    formData.append('ticketID', ticket.ticketID.toString());
-    formData.append('assignee', ticket.assignee.userID.toString());
-    formData.append('tracker', ticket.tracker.ticketTypeID.toString());
-    formData.append('status', ticket.status.statusID.toString());
-    formData.append('subject', ticket.subject.toString());
-    formData.append('description', ticket.description.toString());
-    formData.append('createdAt', createdAt.toString());
-
-    this.queryService.updateTicket(formData).subscribe(res => {
-      this.dialogRef.close(res);
-    });
+    if(this.form.valid) {
+      let formData: FormData = new FormData();
+      let createdAt = ticket.createdAt[0] + '-' + String(ticket.createdAt[1]).padStart(2, '0') + '-' + String(ticket.createdAt[2]).padStart(2, '0');
+      formData.append('ticketID', ticket.ticketID.toString());
+      formData.append('assignee', this.assignee.value!.toString());
+      formData.append('tracker', this.tracker.value!.toString());
+      formData.append('status', this.status.value!.toString());
+      formData.append('subject', this.subject.value!.toString());
+      formData.append('description', this.description.value != null ? this.description.value.toString() : '');
+      formData.append('createdAt', createdAt.toString());
+  
+      this.queryService.updateTicket(formData).subscribe(res => {
+        this.dialogRef.close(res);
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
   compareTracker(dataTracker: any, optionTracker: any): boolean {
@@ -58,21 +75,31 @@ export class UpdateTicketComponent implements OnInit {
     return dataAssignee.userID === optionAssignee.userID;
   }
 
-  selectAssignee(assignee: any, event: any) {
-    if(event.isUserInput) {
-      this.data['ticket'].assignee = assignee;
-    }
+  get f() {
+    return this.form.controls;
   }
 
-  selectTracker(tracker: any, event: any) {
-    if(event.isUserInput) {
-      this.data['ticket'].tracker = tracker;
-    }
+  get ticketID() {
+    return this.form.controls.ticketID;
   }
 
-  selectStatus(status: any, event: any) {
-    if(event.isUserInput) {
-      this.data['ticket'].status = status;
-    }
+  get subject() {
+    return this.form.controls.subject;
+  }
+
+  get description() {
+    return this.form.controls.description;
+  }
+
+  get assignee() {
+    return this.form.controls.assignee;
+  }
+
+  get tracker() {
+    return this.form.controls.tracker;
+  }
+
+  get status() {
+    return this.form.controls.status;
   }
 }
