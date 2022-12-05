@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/models/IUser';
@@ -11,14 +12,17 @@ import { QueryService } from 'src/app/services/query.service';
 })
 export class CreateTrackerComponent implements OnInit {
   assigneeList: any = [];
-
-  typeName: any;
-  description: any;
-  defaultAssignee: any;
+  
+  form = this.fb.group({
+    typeName: ['', [Validators.required]],
+    description: [''],
+    defaultAssignee: ['', [Validators.required]]
+  });
 
   constructor(
     private queryService: QueryService,
-    public dialogRef: MatDialogRef<CreateTrackerComponent>
+    public dialogRef: MatDialogRef<CreateTrackerComponent>,
+    private fb: FormBuilder
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -30,20 +34,35 @@ export class CreateTrackerComponent implements OnInit {
   }
 
   createTracker() {
-    let formData: FormData = new FormData();
+    if(this.form.valid) {
+      let formData: FormData = new FormData();
 
-    formData.append('typeName', this.typeName.toString());
-    formData.append('description', this.description != null ? this.description.toString() : '');
-    formData.append('defaultAssignee', this.defaultAssignee.toString());
-
-    this.queryService.createTicketType(formData).subscribe(res => {
-      this.dialogRef.close(res);
-    });
-  }
-
-  selectAssignee(assignee: any, event: any) {
-    if(event.isUserInput) {
-      this.defaultAssignee = assignee;
+      formData.append('typeName', this.typeName.value!.toString());
+      formData.append('description', this.description.value != null ? this.description.value.toString() : '');
+      formData.append('defaultAssignee', this.defaultAssignee.value!.toString());
+  
+      this.queryService.createTicketType(formData).subscribe(res => {
+        this.dialogRef.close(res);
+      });
+    } else {
+      this.form.markAllAsTouched();
     }
   }
+
+  get f() {
+    return this.form.controls;
+  }
+
+  get typeName() {
+    return this.form.controls.typeName;
+  }
+
+  get description() {
+    return this.form.controls.description;
+  }
+
+  get defaultAssignee() {
+    return this.form.controls.defaultAssignee;
+  }
+
 }
