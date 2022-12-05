@@ -10,6 +10,7 @@ import { DeleteTicketComponent } from '../../delete-ticket/delete-ticket.compone
 import { UpdateTicketComponent } from '../../update-ticket/update-ticket.component';
 import { ViewTicketComponent } from '../../view-ticket/view-ticket.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -102,6 +103,38 @@ export class UserHomeComponent implements OnInit {
 
         this.openSnackbar('Ticket deleted.', 'Dismiss');
       }
+    });
+  }
+
+  exportAgingCategoryCsv() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'Application/json; charset=UTF-8'
+      }),
+      responseType: 'text',
+    };
+
+    this.queryService.exportAllAgingCategory(httpOptions).subscribe(res => {
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
+      link.download = 'aging_by_category.csv';
+      link.click();
+    });
+  }
+
+  exportCategoryCountCsv() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'Application/json; charset=UTF-8'
+      }),
+      responseType: 'text',
+    };
+
+    this.queryService.exportCountCategory(httpOptions).subscribe(res => {
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
+      link.download = 'count_category.csv';
+      link.click();
     });
   }
 

@@ -10,8 +10,8 @@ export class HttpService {
 
 
   //HTTP GET
-  public get (url:string){
-    return this.http.get(url);
+  public get (url:string, httpOptions?: any){
+    return httpOptions !== null ? this.http.get(url, httpOptions) : this.http.get(url);
   }
   //HTTP POST
   public post (url: string, data:any){

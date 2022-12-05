@@ -28,9 +28,9 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>Generate All Tickets</button>
-        <button mat-menu-item>Aging Tickets by Category</button>
+        <button mat-menu-item (click)="exportAgingCategoryCsv()">Aging Tickets by Category</button>
         <button mat-menu-item>Ticket Count per User</button>
-        <button mat-menu-item>Ticket Count per Category</button>
+        <button mat-menu-item (click)="exportCategoryCountCsv()">Ticket Count per Category</button>
       </mat-menu>
     </div>
 
