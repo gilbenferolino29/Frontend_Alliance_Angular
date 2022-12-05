@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { TicketType } from 'src/app/models/ITicketType';
@@ -13,10 +14,18 @@ import { QueryService } from 'src/app/services/query.service';
 export class UpdateTrackerComponent implements OnInit {
   assigneeList: any = [];
 
+  form = this.fb.group({
+    ticketTypeID: [this.data['tracker'].ticketTypeID],
+    typeName: [this.data['tracker'].typeName, [Validators.required]],
+    description: [this.data['tracker'].description],
+    defaultAssignee: [this.data['tracker'].defaultAssignee[0].userID, [Validators.required]]
+  });
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private queryService: QueryService,
-    public dialogRef: MatDialogRef<UpdateTrackerComponent>
+    public dialogRef: MatDialogRef<UpdateTrackerComponent>,
+    private fb: FormBuilder
     ) { }
 
   async ngOnInit(): Promise<void> {
@@ -28,22 +37,40 @@ export class UpdateTrackerComponent implements OnInit {
   }
 
   updateTracker(tracker: TicketType) {
-    let formData: FormData = new FormData();
+    if(this.form.valid) {
+      let formData: FormData = new FormData();
 
-    formData.append('ticketTypeID', tracker.ticketTypeID.toString());
-    formData.append('typeName', tracker.typeName.toString());
-    formData.append('description', tracker.description != null ? tracker.description.toString() : '');
-    formData.append('defaultAssignee', this.data['tracker'].defaultAssignee[0].userID.toString());
-
-    this.queryService.updateTicketType(formData).subscribe(res => {
-      this.dialogRef.close(res);
-    });
+      formData.append('ticketTypeID', this.ticketTypeID.value!.toString());
+      formData.append('typeName', this.typeName.value!.toString());
+      formData.append('description', this.description.value != null ? this.description.value.toString() : '');
+      formData.append('defaultAssignee', this.defaultAssignee.value!.toString());
+  
+      this.queryService.updateTicketType(formData).subscribe(res => {
+        this.dialogRef.close(res);
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
   }
 
-  selectAssignee(assignee: any, event: any) {
-    if(event.isUserInput) {
-      this.data['tracker'].defaultAssignee[0] = assignee;
-    }
+  get f() {
+    return this.form.controls;
+  }
+
+  get ticketTypeID() {
+    return this.form.controls.ticketTypeID;
+  }
+
+  get typeName() {
+    return this.form.controls.typeName;
+  }
+
+  get description() {
+    return this.form.controls.description;
+  }
+
+  get defaultAssignee() {
+    return this.form.controls.defaultAssignee;
   }
 
 }
