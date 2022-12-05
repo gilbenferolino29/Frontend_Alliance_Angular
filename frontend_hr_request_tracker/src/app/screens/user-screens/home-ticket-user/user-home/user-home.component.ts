@@ -22,6 +22,12 @@ export class UserHomeComponent implements OnInit {
   public displayedColumns = ['ticketID', 'assignee', 'tracker', 'subject', 'description', 'status', 'createdAt', 'view', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Ticket>;
   tickets: any = [];
+  csvHttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'Application/json; charset=UTF-8'
+    }),
+    responseType: 'text',
+  };
 
   constructor(
     private router: Router,
@@ -33,7 +39,6 @@ export class UserHomeComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.populate();
     console.log(this.dataSource.data);
-   
   }
   
   nav(destination: string) {
@@ -106,15 +111,17 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  exportAgingCategoryCsv() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'Application/json; charset=UTF-8'
-      }),
-      responseType: 'text',
-    };
+  exportAllTicketsCsv() {
+    this.queryService.exportAllTickets(this.csvHttpOptions).subscribe(res => {
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
+      link.download = 'tickets.csv';
+      link.click();
+    });
+  }
 
-    this.queryService.exportAllAgingCategory(httpOptions).subscribe(res => {
+  exportAgingCategoryCsv() {
+    this.queryService.exportAllAgingCategory(this.csvHttpOptions).subscribe(res => {
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
       link.download = 'aging_by_category.csv';
@@ -123,17 +130,19 @@ export class UserHomeComponent implements OnInit {
   }
 
   exportCategoryCountCsv() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'Application/json; charset=UTF-8'
-      }),
-      responseType: 'text',
-    };
-
-    this.queryService.exportCountCategory(httpOptions).subscribe(res => {
+    this.queryService.exportCountCategory(this.csvHttpOptions).subscribe(res => {
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
       link.download = 'count_category.csv';
+      link.click();
+    });
+  }
+
+  exportUserCountCsv() {
+    this.queryService.exportCountUser(this.csvHttpOptions).subscribe(res => {
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
+      link.download = 'count_user.csv';
       link.click();
     });
   }

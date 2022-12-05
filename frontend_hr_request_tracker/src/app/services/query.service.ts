@@ -38,11 +38,17 @@ export class QueryService {
   public getAllTicketTypes(){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTicketTypes)
   }
+  public exportAllTickets(httpOptions: any) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.exportAllTickets, httpOptions);
+  }
   public exportAllAgingCategory(httpOptions: any) {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allAgingByCategory, httpOptions);
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.exportAgingByCategory, httpOptions);
   }
   public exportCountCategory(httpOptions: any) {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allCategoryCount, httpOptions);
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.exportCategoryCount, httpOptions);
+  }
+  public exportCountUser(httpOptions: any) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.exportUserCount, httpOptions);
   }
 
   public createTicketType(data: any) {

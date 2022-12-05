@@ -15,8 +15,10 @@ export class GlobalConstants {
         //GET
     public static ticketInfo = "ticket/";
     public static allTickets = "tickets/";
-    public static allAgingByCategory = "tickets/category/aging/";
-    public static allCategoryCount = "tickets/category/count/";
+    public static exportAllTickets = "tickets/all/"
+    public static exportAgingByCategory = "tickets/category/aging/";
+    public static exportCategoryCount = "tickets/category/count/";
+    public static exportUserCount = "tickets/user/count";
         //POST
     public static createTicket = "tickets/create/";
     public static updateTicket = "tickets/update/";
