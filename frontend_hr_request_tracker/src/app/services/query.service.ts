@@ -71,6 +71,10 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allUsers);
   }
 
+  public login(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.login, data);
+  }
+
   public createUser(data: any) {
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createUser, data);
   }
