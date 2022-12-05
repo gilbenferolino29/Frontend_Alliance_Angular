@@ -20,8 +20,9 @@ export class DeleteRoleComponent implements OnInit {
   }
 
   deleteRole(role: Role) {
-    this.queryService.deleteRole(role.roleID.toString()).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.deleteRole(role.roleID.toString()).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
 }

@@ -26,8 +26,9 @@ export class UpdateRoleComponent implements OnInit {
     formData.append('roleName', role.roleName.toString());
     formData.append('roleAbbv', role.roleAbbv.toString());
 
-    this.queryService.updateRole(formData).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.updateRole(formData).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
 }

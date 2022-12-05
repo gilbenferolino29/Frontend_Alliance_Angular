@@ -25,7 +25,8 @@ export class CreateRoleComponent implements OnInit {
     formData.append('roleName', this.roleName.toString());
     formData.append('roleAbbv', this.roleAbbv.toString());
 
-    this.queryService.createRole(formData).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.createRole(formData).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 }

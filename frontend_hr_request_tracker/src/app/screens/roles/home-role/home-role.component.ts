@@ -46,8 +46,9 @@ export class HomeRoleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
-        window.location.reload();
+      if(result.data != null) {
+        this.dataSource.data.push(result.data);
+        this.dataSource._updateChangeSubscription();
         this.openSnackbar('Role created.', 'Dismiss');
       }
     });
@@ -63,8 +64,10 @@ export class HomeRoleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
-        window.location.reload();
+      if(result.data != null) {
+        const index = this.dataSource.data.findIndex(x => x.roleID === result.data.roleID);
+        this.dataSource.data[index] = result.data;
+        this.dataSource._updateChangeSubscription();
         this.openSnackbar('Role updated.', 'Dismiss');
       }
     });
@@ -78,7 +81,7 @@ export class HomeRoleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
+      if(result.data == true) {
         const index = this.dataSource.data.findIndex(x => x.roleID === role.roleID);
         this.dataSource.data.splice(index,1)
         this.dataSource._updateChangeSubscription();
