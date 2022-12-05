@@ -81,6 +81,7 @@ export class UserHomeComponent implements OnInit {
       if(result.data != null) {
         const index = this.dataSource.data.findIndex(x => x.ticketID === result.data.ticketID);
         this.dataSource.data[index] = result.data;
+        this.dataSource._updateChangeSubscription();
         this.openSnackbar('Ticket updated.', 'Dismiss');
       }
     });

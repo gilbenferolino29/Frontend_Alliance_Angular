@@ -35,8 +35,9 @@ export class UpdateTrackerComponent implements OnInit {
     formData.append('description', tracker.description != null ? tracker.description.toString() : '');
     formData.append('defaultAssignee', this.data['tracker'].defaultAssignee[0].userID.toString());
 
-    this.queryService.updateTicketType(formData).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.updateTicketType(formData).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
   selectAssignee(assignee: any, event: any) {

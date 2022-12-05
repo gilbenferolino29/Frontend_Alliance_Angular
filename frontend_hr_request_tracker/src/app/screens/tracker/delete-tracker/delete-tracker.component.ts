@@ -19,8 +19,9 @@ export class DeleteTrackerComponent implements OnInit {
   }
 
   deleteTracker(tracker: TicketType) {
-    this.queryService.deleteTicketType(tracker.ticketTypeID.toString()).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.deleteTicketType(tracker.ticketTypeID.toString()).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
 }

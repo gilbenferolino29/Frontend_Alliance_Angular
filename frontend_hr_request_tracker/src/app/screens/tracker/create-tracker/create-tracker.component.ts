@@ -37,9 +37,8 @@ export class CreateTrackerComponent implements OnInit {
     formData.append('defaultAssignee', this.defaultAssignee.toString());
 
     this.queryService.createTicketType(formData).subscribe(res => {
-      console.log(res);
+      this.dialogRef.close(res);
     });
-    this.dialogRef.close(true);
   }
 
   selectAssignee(assignee: any, event: any) {
