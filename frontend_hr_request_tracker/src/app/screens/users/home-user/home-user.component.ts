@@ -45,8 +45,9 @@ export class HomeUserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
-        window.location.reload();
+      if(result.data != null) {
+        this.dataSource.data.push(result.data);
+        this.dataSource._updateChangeSubscription();
         this.openSnackbar('User created.', 'Dismiss');
       }
     });
@@ -62,8 +63,10 @@ export class HomeUserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
-        window.location.reload();
+      if(result.data != null) {
+        const index = this.dataSource.data.findIndex(x => x.userID === result.data.userID);
+        this.dataSource.data[index] = result.data;
+        this.dataSource._updateChangeSubscription();
         this.openSnackbar('User updated.', 'Dismiss');
       }
     });
@@ -77,7 +80,7 @@ export class HomeUserComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
+      if(result.data == true) {
         const index = this.dataSource.data.findIndex(x => x.userID === user.userID);
         this.dataSource.data.splice(index,1)
         this.dataSource._updateChangeSubscription();

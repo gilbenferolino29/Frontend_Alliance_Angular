@@ -20,8 +20,9 @@ export class DeleteUserComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-    this.queryService.deleteUser(user.userID.toString()).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.deleteUser(user.userID.toString()).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
 }

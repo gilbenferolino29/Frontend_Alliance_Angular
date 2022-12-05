@@ -40,8 +40,9 @@ export class UpdateUserComponent implements OnInit {
     formData.append('userLName', user.userLName.toString());
     formData.append('userEmail', user.userEmail.toString());
 
-    this.queryService.updateUser(formData).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.updateUser(formData).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
   selectRole(role: any, event: any) {

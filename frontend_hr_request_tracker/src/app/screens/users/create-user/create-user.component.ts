@@ -42,8 +42,9 @@ export class CreateUserComponent implements OnInit {
     formData.append('userLName', this.userLName.toString());
     formData.append('userEmail', this.userEmail.toString());
 
-    this.queryService.createUser(formData).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.createUser(formData).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
   selectRole(role: any, event: any) {
