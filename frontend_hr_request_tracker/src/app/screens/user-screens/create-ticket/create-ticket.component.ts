@@ -1,5 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { Status } from 'src/app/models/IStatus';
@@ -17,13 +18,17 @@ export class CreateTicketComponentDialog implements OnInit {
   statusList: any = [];
   assigneeList: any = [];
 
-  subject: any;
-  description: any;
-  assignee: any;
-  tracker: any;
-  status: any;
+  form = this.fb.group({
+    subject: ['', [Validators.required]],
+    description: [''],
+    assignee: ['', [Validators.required]],
+    tracker: ['', [Validators.required]],
+    status: ['', [Validators.required]]
+  });
 
-  constructor(private queryService: QueryService, public dialogRef: MatDialogRef<CreateTicketComponentDialog>) { }
+  constructor(private queryService: QueryService, 
+    public dialogRef: MatDialogRef<CreateTicketComponentDialog>,
+    private fb: FormBuilder) { }
 
   async ngOnInit(): Promise<void> {
     await this.populate();
@@ -36,36 +41,46 @@ export class CreateTicketComponentDialog implements OnInit {
   }
 
   createTicket() {
-    let formData: FormData = new FormData();
-    let createdAt = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-
-    formData.append('assignee', this.assignee.toString());
-    formData.append('tracker', this.tracker.toString());
-    formData.append('status', this.status.toString());
-    formData.append('subject', this.subject.toString());
-    formData.append('description', this.description.toString());
-    formData.append('createdAt', createdAt.toString());
-
-    this.queryService.createTicket(formData).subscribe(res => {
-      this.dialogRef.close(res);
-    });
-  }
-
-  selectAssignee(assignee: any, event: any) {
-    if(event.isUserInput) {
-      this.assignee = assignee;
+    if(this.form.valid) {
+      let formData: FormData = new FormData();
+      let createdAt = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+  
+      formData.append('assignee', this.assignee.value!.toString());
+      formData.append('tracker', this.tracker.value!.toString());
+      formData.append('status', this.status.value!.toString());
+      formData.append('subject', this.subject.value!.toString());
+      formData.append('description', this.description.value != null ? this.description.value.toString() : '');
+      formData.append('createdAt', createdAt.toString());
+  
+      this.queryService.createTicket(formData).subscribe(res => {
+        this.dialogRef.close(res);
+      });
+    } else {
+      this.form.markAllAsTouched();
     }
   }
 
-  selectTracker(tracker: any, event: any) {
-    if(event.isUserInput) {
-      this.tracker = tracker;
-    }
+  get f() {
+    return this.form.controls;
   }
 
-  selectStatus(status: any, event: any) {
-    if(event.isUserInput) {
-      this.status = status;
-    }
+  get subject() {
+    return this.form.controls.subject;
+  }
+
+  get description() {
+    return this.form.controls.description;
+  }
+
+  get assignee() {
+    return this.form.controls.assignee;
+  }
+
+  get tracker() {
+    return this.form.controls.tracker;
+  }
+
+  get status() {
+    return this.form.controls.status;
   }
 }
