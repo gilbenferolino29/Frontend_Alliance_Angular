@@ -63,18 +63,6 @@ export class UpdateTicketComponent implements OnInit {
     }
   }
 
-  compareTracker(dataTracker: any, optionTracker: any): boolean {
-    return dataTracker.ticketTypeID === optionTracker.ticketTypeID;
-  }
-
-  compareStatus(dataStatus: any, optionStatus: any): boolean {
-    return dataStatus.statusID === optionStatus.statusID;
-  }
-
-  compareAssignee(dataAssignee: any, optionAssignee: any): boolean {
-    return dataAssignee.userID === optionAssignee.userID;
-  }
-
   get f() {
     return this.form.controls;
   }
