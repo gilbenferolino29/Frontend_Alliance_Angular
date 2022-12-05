@@ -26,6 +26,8 @@ export class CreateTicketComponentDialog implements OnInit {
     status: ['', [Validators.required]]
   });
 
+  assigneeUserSelected: any = false;
+
   constructor(private queryService: QueryService, 
     public dialogRef: MatDialogRef<CreateTicketComponentDialog>,
     private fb: FormBuilder) { }
@@ -57,6 +59,18 @@ export class CreateTicketComponentDialog implements OnInit {
       });
     } else {
       this.form.markAllAsTouched();
+    }
+  }
+
+  assigneeSelected(event: any) {
+    if(event.isUserInput) {
+      this.assigneeUserSelected = true;
+    }
+  }
+
+  checkDefaultAssignee(tracker: any, event: any) {
+    if(event.isUserInput && !this.assigneeUserSelected) {
+      this.assignee.setValue(tracker.defaultAssignee[0].userID);
     }
   }
 

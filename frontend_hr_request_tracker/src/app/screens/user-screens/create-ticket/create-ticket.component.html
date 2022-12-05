@@ -6,7 +6,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Assignee</mat-label>
                     <mat-select [formControl]="assignee" required>
-                        <mat-option *ngFor="let assignee of assigneeList" [value]="assignee.userID">
+                        <mat-option *ngFor="let assignee of assigneeList" [value]="assignee.userID" (onSelectionChange)="assigneeSelected($event)">
                             {{ assignee.userFName }} {{ assignee.userLName }}
                         </mat-option>
                     </mat-select>
@@ -19,7 +19,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Tracker</mat-label>
                     <mat-select [formControl]="tracker" required>
-                        <mat-option *ngFor="let tracker of trackerList" [value]="tracker.ticketTypeID">
+                        <mat-option *ngFor="let tracker of trackerList" [value]="tracker.ticketTypeID" (onSelectionChange)="checkDefaultAssignee(tracker, $event)" >
                             {{ tracker.typeName }}
                         </mat-option>
                     </mat-select>
