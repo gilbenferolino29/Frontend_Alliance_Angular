@@ -50,8 +50,9 @@ export class UserHomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
-        window.location.reload();
+      if(result.data != null) {
+        this.dataSource.data.push(result.data);
+        this.dataSource._updateChangeSubscription();
         this.openSnackbar('Ticket created.', 'Dismiss');
       }
     });
@@ -77,8 +78,9 @@ export class UserHomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
-        window.location.reload();
+      if(result.data != null) {
+        const index = this.dataSource.data.findIndex(x => x.ticketID === result.data.ticketID);
+        this.dataSource.data[index] = result.data;
         this.openSnackbar('Ticket updated.', 'Dismiss');
       }
     });
@@ -92,7 +94,7 @@ export class UserHomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result == true) {
+      if(result.data == true) {
         const index = this.dataSource.data.findIndex(x => x.ticketID === ticket.ticketID);
         this.dataSource.data.splice(index,1)
         this.dataSource._updateChangeSubscription();

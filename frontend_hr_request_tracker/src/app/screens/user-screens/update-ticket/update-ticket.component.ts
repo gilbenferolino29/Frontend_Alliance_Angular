@@ -41,8 +41,9 @@ export class UpdateTicketComponent implements OnInit {
     formData.append('description', ticket.description.toString());
     formData.append('createdAt', createdAt.toString());
 
-    this.queryService.updateTicket(formData).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.updateTicket(formData).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
   compareTracker(dataTracker: any, optionTracker: any): boolean {

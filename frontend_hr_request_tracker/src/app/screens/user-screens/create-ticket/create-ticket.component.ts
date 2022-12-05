@@ -46,8 +46,9 @@ export class CreateTicketComponentDialog implements OnInit {
     formData.append('description', this.description.toString());
     formData.append('createdAt', createdAt.toString());
 
-    this.queryService.createTicket(formData).subscribe();
-    this.dialogRef.close(true);
+    this.queryService.createTicket(formData).subscribe(res => {
+      this.dialogRef.close(res);
+    });
   }
 
   selectAssignee(assignee: any, event: any) {

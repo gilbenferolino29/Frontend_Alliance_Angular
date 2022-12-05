@@ -17,8 +17,9 @@ export class DeleteTicketComponent implements OnInit {
     }
 
     deleteTicket (ticket:Ticket){
-      this.queryService.deleteTicket(ticket.ticketID.toString()).subscribe();
-      this.dialogRef.close(true);
+      this.queryService.deleteTicket(ticket.ticketID.toString()).subscribe(res => {
+        this.dialogRef.close(res);
+      });
      }
 
 }
