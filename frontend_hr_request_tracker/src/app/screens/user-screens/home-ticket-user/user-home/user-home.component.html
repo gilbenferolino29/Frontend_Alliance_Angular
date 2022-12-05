@@ -22,6 +22,16 @@
       <button mat-raised-button color="primary" (click)="openDialogCreate()">
         Create Ticket
       </button>
+
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+        Export to CSV
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Generate All Tickets</button>
+        <button mat-menu-item>Aging Tickets by Category</button>
+        <button mat-menu-item>Ticket Count per User</button>
+        <button mat-menu-item>Ticket Count per Category</button>
+      </mat-menu>
     </div>
 
     <div id="table-container">

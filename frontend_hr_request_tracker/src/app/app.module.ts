@@ -45,6 +45,7 @@ import { CreateUserComponent } from './screens/users/create-user/create-user.com
 import { UpdateUserComponent } from './screens/users/update-user/update-user.component';
 import { DeleteUserComponent } from './screens/users/delete-user/delete-user.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,6 +95,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDividerModule,
     MatListModule,
     MatSnackBarModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

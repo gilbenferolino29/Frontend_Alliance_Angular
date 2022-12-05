@@ -123,3 +123,7 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   font-weight: 500;
   font-size: 24pt;
 }
+
+.demo-button-container > button {
+  margin-right: 0.5%;
+}
