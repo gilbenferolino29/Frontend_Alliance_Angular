@@ -36,7 +36,7 @@ export class UpdateTrackerComponent implements OnInit {
     this.assigneeList = await firstValueFrom(this.queryService.getAllUsers()) as User[];
   }
 
-  updateTracker(tracker: TicketType) {
+  updateTracker() {
     if(this.form.valid) {
       let formData: FormData = new FormData();
 
