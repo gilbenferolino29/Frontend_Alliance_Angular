@@ -4,12 +4,6 @@
         <mat-grid-list cols="3" rowHeight="3:1">
             <mat-grid-tile>
                 <mat-form-field appearance="fill">
-                    <mat-label>Ticket ID</mat-label>
-                    <input matInput [formControl]="ticketID">
-                  </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-form-field appearance="fill">
                     <mat-label>Assignee</mat-label>
                     <mat-select [formControl]="assignee">
                         <mat-option *ngFor="let assignee of assigneeList" [value]="assignee.userID">
@@ -61,6 +55,12 @@
                         Status field is required.
                     </mat-error>
                   </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <label for="file-name">Attached file: </label>
+                <a href="javascript:void(0)" class="disabled">
+                    {{ data['ticket'].file != null ? data['ticket'].file.fileName : 'No file'}}
+                </a>
             </mat-grid-tile>
         </mat-grid-list>
     </div>

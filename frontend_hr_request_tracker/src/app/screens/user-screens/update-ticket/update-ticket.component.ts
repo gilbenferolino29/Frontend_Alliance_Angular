@@ -24,7 +24,8 @@ export class UpdateTicketComponent implements OnInit {
     description: [this.data['ticket'].description],
     assignee: [this.data['ticket'].assignee.userID, [Validators.required]],
     tracker: [this.data['ticket'].tracker.ticketTypeID, [Validators.required]],
-    status: [this.data['ticket'].status.statusID, [Validators.required]]
+    status: [this.data['ticket'].status.statusID, [Validators.required]],
+    file: [this.data['ticket'].file != null ? this.data['ticket'].file.fileID : '']
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
@@ -53,6 +54,7 @@ export class UpdateTicketComponent implements OnInit {
       formData.append('status', this.status.value!.toString());
       formData.append('subject', this.subject.value!.toString());
       formData.append('description', this.description.value != null ? this.description.value.toString() : '');
+      formData.append('file', this.file.value != null ? this.file.value.toString() : '');
       formData.append('createdAt', createdAt.toString());
   
       this.queryService.updateTicket(formData).subscribe(res => {
@@ -89,5 +91,9 @@ export class UpdateTicketComponent implements OnInit {
 
   get status() {
     return this.form.controls.status;
+  }
+
+  get file() {
+    return this.form.controls.file;
   }
 }
