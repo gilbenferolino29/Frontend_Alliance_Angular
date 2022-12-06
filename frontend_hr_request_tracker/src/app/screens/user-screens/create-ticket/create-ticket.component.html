@@ -59,6 +59,9 @@
                     </mat-error>
                   </mat-form-field>
             </mat-grid-tile>
+            <mat-grid-tile>
+                <input type="file" name="file" id="input-file-id" (change)="onFileChanged($event)">
+            </mat-grid-tile>
         </mat-grid-list>
     </div>
     <div mat-dialog-actions>

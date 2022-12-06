@@ -111,6 +111,11 @@ export class QueryService {
   public deleteRole(id: string) {
     return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteRole + id);
   }
+
+  //FILE REQUESTS
+  public attachFile(data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.attachFile, data);
+  }
   
 
 }

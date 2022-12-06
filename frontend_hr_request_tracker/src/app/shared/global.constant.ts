@@ -53,4 +53,7 @@ export class GlobalConstants {
     public static createRole = "roles/create/";
     public static updateRole = "roles/update/";
     public static deleteRole = "roles/delete/";
+
+    //FILE URLS
+    public static attachFile = "upload/";
 }

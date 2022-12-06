@@ -23,7 +23,9 @@ export class CreateTicketComponentDialog implements OnInit {
     description: [''],
     assignee: ['', [Validators.required]],
     tracker: ['', [Validators.required]],
-    status: ['', [Validators.required]]
+    status: ['', [Validators.required]],
+    file: [''],
+    fileName: ['']
   });
 
   assigneeUserSelected: any = false;
@@ -44,16 +46,21 @@ export class CreateTicketComponentDialog implements OnInit {
 
   createTicket() {
     if(this.form.valid) {
+      if(this.file.value!) {
+        this.uploadFile();
+      }
+
       let formData: FormData = new FormData();
       let createdAt = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-  
+    
       formData.append('assignee', this.assignee.value!.toString());
       formData.append('tracker', this.tracker.value!.toString());
       formData.append('status', this.status.value!.toString());
       formData.append('subject', this.subject.value!.toString());
       formData.append('description', this.description.value != null ? this.description.value.toString() : '');
       formData.append('createdAt', createdAt.toString());
-  
+      formData.append('file', this.fileName.value != null ? this.fileName.value.toString() : '');
+
       this.queryService.createTicket(formData).subscribe(res => {
         this.dialogRef.close(res);
       });
@@ -72,6 +79,21 @@ export class CreateTicketComponentDialog implements OnInit {
     if(event.isUserInput && !this.assigneeUserSelected) {
       this.assignee.setValue(tracker.defaultAssignee[0].userID);
     }
+  }
+
+  onFileChanged(event: any) {
+    if(event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+      this.file.setValue(file);
+      this.fileName.setValue(file.name);
+    }
+  }
+
+  uploadFile() {
+    let fileData: FormData = new FormData();
+
+    fileData.append('file', this.file.value!);
+    this.queryService.attachFile(fileData).subscribe();
   }
 
   get f() {
@@ -96,5 +118,13 @@ export class CreateTicketComponentDialog implements OnInit {
 
   get status() {
     return this.form.controls.status;
+  }
+
+  get file() {
+    return this.form.controls.file;
+  }
+
+  get fileName() {
+    return this.form.controls.fileName;
   }
 }
