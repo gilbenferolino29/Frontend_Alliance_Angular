@@ -46,10 +46,6 @@ export class CreateTicketComponentDialog implements OnInit {
 
   createTicket() {
     if(this.form.valid) {
-      if(this.file.value!) {
-        this.uploadFile();
-      }
-
       let formData: FormData = new FormData();
       let createdAt = formatDate(new Date(), 'yyyy-MM-dd', 'en');
     
@@ -59,7 +55,7 @@ export class CreateTicketComponentDialog implements OnInit {
       formData.append('subject', this.subject.value!.toString());
       formData.append('description', this.description.value != null ? this.description.value.toString() : '');
       formData.append('createdAt', createdAt.toString());
-      formData.append('file', this.fileName.value != null ? this.fileName.value.toString() : '');
+      formData.append('file', this.fileName ? this.fileName.value!.toString() : '');
 
       this.queryService.createTicket(formData).subscribe(res => {
         this.dialogRef.close(res);
@@ -67,6 +63,17 @@ export class CreateTicketComponentDialog implements OnInit {
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+  uploadFile() {
+    let fileData: FormData = new FormData();
+
+    fileData.append('file', this.file.value!);
+
+    this.queryService.attachFile(fileData).subscribe((res: any) => {
+      this.fileName.setValue(res.data.fileID);
+      this.createTicket();
+    });
   }
 
   assigneeSelected(event: any) {
@@ -85,15 +92,7 @@ export class CreateTicketComponentDialog implements OnInit {
     if(event.target.files && event.target.files.length) {
       const file = event.target.files[0];
       this.file.setValue(file);
-      this.fileName.setValue(file.name);
     }
-  }
-
-  uploadFile() {
-    let fileData: FormData = new FormData();
-
-    fileData.append('file', this.file.value!);
-    this.queryService.attachFile(fileData).subscribe();
   }
 
   get f() {

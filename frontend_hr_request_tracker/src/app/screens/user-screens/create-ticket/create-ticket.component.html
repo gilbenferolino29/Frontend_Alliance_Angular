@@ -66,6 +66,6 @@
     </div>
     <div mat-dialog-actions>
       <button mat-button mat-dialog-close>Back</button>
-      <button mat-button (click)="createTicket()">Create</button>
+      <button mat-button (click)="file.value ? uploadFile() : createTicket()">Create</button>
     </div>
 </form>
