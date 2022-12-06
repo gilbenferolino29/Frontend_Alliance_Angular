@@ -57,4 +57,11 @@ export class GlobalConstants {
     //FILE URLS
     public static attachFile = "upload/";
     public static viewFile = "file/"
+
+    //TOKEN URLS
+    public static tokenInfo = "token/";
+    public static authenticate = "authenticate/";
+
+    public static generateToken = "token/create/";
+    public static deleteToken = "token/delete/"
 }

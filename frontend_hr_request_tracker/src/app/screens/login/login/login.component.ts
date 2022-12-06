@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { mergeMap } from 'rxjs';
 import { QueryService } from 'src/app/services/query.service';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-login',
@@ -45,12 +47,27 @@ export class LoginComponent implements OnInit {
 
       formData.append('username', this.f.email.value != null ? this.f.email.value.toString() : '');
       formData.append('password', this.f.password.value != null ? this.f.password.value.toString() : '');
+      
+
+      this.queryService.login(formData).pipe(
+        mergeMap((res1: any) => {
+          if(res1.status === "SUCCESS") {
+            let tokenData: FormData = new FormData();
+            var userID = res1.data.userID;
+            var authToken = uuid.v4();
   
-      this.queryService.login(formData).subscribe((res: any) => {
-        if(res.status === "SUCCESS") {
-          // ROUTE HERE OR ENABLE AUTHGUARD
-          this.router.navigate(['tickets']);
-        }
+            tokenData.append('user', userID.toString());
+            tokenData.append('authToken', authToken.toString());
+            
+            return this.queryService.generateToken(tokenData);
+          }
+
+          throw('User not found.');
+        })
+        ).subscribe((res: any) => {
+          if(res.status === "SUCCESS") {
+            this.router.navigate(['tickets']);
+          }
       });
     } else {
       this.form.markAllAsTouched();
