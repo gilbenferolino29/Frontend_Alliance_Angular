@@ -56,4 +56,5 @@ export class GlobalConstants {
 
     //FILE URLS
     public static attachFile = "upload/";
+    public static viewFile = "file/"
 }

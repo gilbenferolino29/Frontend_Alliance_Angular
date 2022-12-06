@@ -43,6 +43,12 @@
                 <input matInput [(ngModel)]="data['ticket'].createdAt" [readonly]="true">
               </mat-form-field>
         </mat-grid-tile>
+        <mat-grid-tile>
+            <label for="file-name">Attached file: </label>
+            <a href="javascript:void(0)" class="{{ data['ticket'].file == null ? 'disabled' : '' }}" (click)="viewFile(data['ticket'].file)">
+                {{ data['ticket'].file != null ? data['ticket'].file.fileName : 'No file'}}
+            </a>
+        </mat-grid-tile>
     </mat-grid-list>
 </div>
 <div mat-dialog-actions>

@@ -116,6 +116,9 @@ export class QueryService {
   public attachFile(data: any) {
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.attachFile, data);
   }
+  public viewFile(id: string, httpOptions: any) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.viewFile + id, httpOptions);
+  }
   
 
 }
