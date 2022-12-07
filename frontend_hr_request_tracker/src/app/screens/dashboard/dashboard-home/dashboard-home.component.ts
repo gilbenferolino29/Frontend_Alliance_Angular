@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { firstValueFrom, tap } from 'rxjs';
 import { Ticket } from 'src/app/models/ITicket';
 import { QueryService } from 'src/app/services/query.service';
+import { UpdateTicketComponent } from '../../common/modals/update-ticket/update-ticket.component';
+import { ViewTicketComponent } from '../../common/modals/view-ticket/view-ticket.component';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -46,6 +48,8 @@ export class DashboardHomeComponent implements OnInit {
       this.isTicketsLoading = false;
       this.userTickets.data = res.content;
       this.ticketsCount = res.totalElements;
+
+      console.log(this.userTickets.data);
     })).subscribe();
   }
 
@@ -75,8 +79,46 @@ export class DashboardHomeComponent implements OnInit {
     window.location.reload();
   }
 
-  openDialogView(ticket: any) {}
+  openDialogView(ticket: Ticket) {
+    this.dialog.open(ViewTicketComponent, {
+      data: {
+        ticket: ticket,
+      },
+      height: '350px',
+      width: '800px',
+    });
+  }
 
-  openDialogUpdate(ticket: any) {}
+  openDialogUpdate(ticket: Ticket) {
+    const dialogRef = this.dialog.open(UpdateTicketComponent, {
+      data: {
+        ticket: ticket,
+      },
+      height: '350px',
+      width: '800px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.data != null) {
+        const index = this.userTickets.data.findIndex(x => x.ticketID === result.data.ticketID);
+        this.userTickets.data[index] = result.data;
+        this.userTickets._updateChangeSubscription();
+
+        const agingIndex = this.agingTickets.data.findIndex(x => x.ticketID === result.data.ticketID);
+        if(agingIndex != -1) {
+          this.agingTickets.data[agingIndex] = result.data;
+          this.agingTickets._updateChangeSubscription();
+        }
+
+        this.openSnackbar('Ticket updated.', 'Dismiss');
+      }
+    });
+  }
+
+  openSnackbar(message: string, action: string) {
+    this._snackbar.open(message, action, {
+      duration: 3000
+    });
+  }
 
 }

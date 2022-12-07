@@ -7,8 +7,8 @@ import { Ticket } from 'src/app/models/ITicket';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateTicketComponentDialog } from '../../create-ticket/create-ticket.component';
 import { DeleteTicketComponent } from '../../delete-ticket/delete-ticket.component';
-import { UpdateTicketComponent } from '../../update-ticket/update-ticket.component';
-import { ViewTicketComponent } from '../../view-ticket/view-ticket.component';
+import { UpdateTicketComponent } from '../../../common/modals/update-ticket/update-ticket.component';
+import { ViewTicketComponent } from '../../../common/modals/view-ticket/view-ticket.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
 
