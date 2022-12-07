@@ -35,8 +35,9 @@ export class QueryService {
       GlobalConstants.userAgingTickets + id + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
   }
 
-  public getAllAgingTickets() {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allAgingTickets);
+  public getAllAgingTickets(page: number, size: number, active: any, direction: any) {
+    return this.httpService.get(GlobalConstants.server_url + 
+      GlobalConstants.allAgingTickets + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
   }
 
   public createTicket(data:any){

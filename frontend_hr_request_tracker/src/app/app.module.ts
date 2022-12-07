@@ -50,6 +50,7 @@ import { DashboardHomeComponent } from './screens/dashboard/dashboard-home/dashb
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { AllAgingTicketsComponent } from './screens/dashboard/all-aging-tickets/all-aging-tickets.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +77,8 @@ import { MatSortModule } from '@angular/material/sort';
     CreateUserComponent,
     UpdateUserComponent,
     DeleteUserComponent,
-    DashboardHomeComponent
+    DashboardHomeComponent,
+    AllAgingTicketsComponent
   ],
   imports: [
     BrowserModule,

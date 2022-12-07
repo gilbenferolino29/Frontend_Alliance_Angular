@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './screens/admin-screens/home-ticket-admin/admin-home/admin-home.component';
 import { CreateTicketComponent } from './screens/create-ticket/create-ticket.component';
+import { AllAgingTicketsComponent } from './screens/dashboard/all-aging-tickets/all-aging-tickets.component';
 import { DashboardHomeComponent } from './screens/dashboard/dashboard-home/dashboard-home.component';
 import { LandingpageComponent } from './screens/landing-page/landingpage/landingpage.component';
 import { LoginComponent } from './screens/login/login/login.component';
@@ -25,6 +26,14 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardHomeComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'aging',
+    component: AllAgingTicketsComponent,
+    canActivate: [AuthGuard],
+    data: {
+     role: 'ADMIN' 
+    }
   },
   {
     path: '',
