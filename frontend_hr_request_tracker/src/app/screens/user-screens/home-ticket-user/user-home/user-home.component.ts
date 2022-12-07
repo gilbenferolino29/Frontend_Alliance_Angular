@@ -49,6 +49,11 @@ export class UserHomeComponent implements OnInit {
     this.dataSource.data = await firstValueFrom(this.queryService.getAllTickets()) as Ticket[]; 
   }
 
+  logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
   openDialogCreate() {
     const dialogRef = this.dialog.open(CreateTicketComponentDialog, {
       height: '350px',

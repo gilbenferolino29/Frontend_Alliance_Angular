@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(localStorage.getItem('user'));
   }
 
   nav(destination: string) {
@@ -58,6 +59,8 @@ export class LoginComponent implements OnInit {
   
             tokenData.append('user', userID.toString());
             tokenData.append('authToken', authToken.toString());
+
+            localStorage.setItem('user', userID);
             
             return this.queryService.generateToken(tokenData);
           }

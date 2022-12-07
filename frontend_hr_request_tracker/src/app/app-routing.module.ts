@@ -9,6 +9,7 @@ import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracke
 import { UserHomeComponent } from './screens/user-screens/home-ticket-user/user-home/user-home.component';
 import { HomeUserComponent } from './screens/users/home-user/home-user.component';
 import { ViewticketComponent } from './screens/viewticket/viewticket.component';
+import { AuthguardGuard } from './shared/authguard.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
   },
   {
     path: 'tickets',
-    component: UserHomeComponent
+    component: UserHomeComponent,
+    canActivate: [AuthguardGuard]
   },
   {
     path: 'viewticket',
@@ -41,15 +43,18 @@ const routes: Routes = [
   },
   {
     path: 'trackers',
-    component: HomeTrackerComponent
+    component: HomeTrackerComponent,
+    canActivate: [AuthguardGuard]
   },
   {
     path: 'users',
-    component: HomeUserComponent
+    component: HomeUserComponent,
+    canActivate: [AuthguardGuard]
   },
   {
     path: 'roles',
-    component: HomeRoleComponent
+    component: HomeRoleComponent,
+    canActivate: [AuthguardGuard]
   },
 ];
 
