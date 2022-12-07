@@ -71,10 +71,6 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allUsers);
   }
 
-  public login(data: any) {
-    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.login, data);
-  }
-
   public createUser(data: any) {
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createUser, data);
   }
@@ -119,19 +115,4 @@ export class QueryService {
   public viewFile(id: string, httpOptions: any) {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.viewFile + id, httpOptions);
   }
-
-  //TOKEN REQUESTS
-  public getTokenInfo(id: string) {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.tokenInfo + id);
-  }
-  public authenticate(id: string) {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.authenticate + id);
-  }
-  public generateToken(data: any) {
-    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.generateToken, data);
-  }
-  public deleteToken(id: string) {
-    return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteToken + id);
-  }  
-
 }

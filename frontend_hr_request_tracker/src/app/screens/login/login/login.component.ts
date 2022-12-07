@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { mergeMap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { QueryService } from 'src/app/services/query.service';
 import * as uuid from 'uuid';
 
@@ -20,10 +21,11 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private queryService: QueryService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    console.log(localStorage.getItem('user'));
+
   }
 
   nav(destination: string) {
@@ -50,19 +52,21 @@ export class LoginComponent implements OnInit {
       formData.append('password', this.f.password.value != null ? this.f.password.value.toString() : '');
       
 
-      this.queryService.login(formData).pipe(
+      this.authService.login(formData).pipe(
         mergeMap((res1: any) => {
           if(res1.status === "SUCCESS") {
             let tokenData: FormData = new FormData();
             var userID = res1.data.userID;
+            var userRole = res1.data.userRole.roleAbbv;
             var authToken = uuid.v4();
   
             tokenData.append('user', userID.toString());
             tokenData.append('authToken', authToken.toString());
 
             localStorage.setItem('user', userID);
+            localStorage.setItem('role', userRole);
             
-            return this.queryService.generateToken(tokenData);
+            return this.authService.generateToken(tokenData);
           }
 
           throw('User not found.');
