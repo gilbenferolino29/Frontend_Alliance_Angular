@@ -23,7 +23,8 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardHomeComponent
+    component: DashboardHomeComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',

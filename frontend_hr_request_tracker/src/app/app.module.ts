@@ -47,6 +47,8 @@ import { DeleteUserComponent } from './screens/users/delete-user/delete-user.com
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { DashboardHomeComponent } from './screens/dashboard/dashboard-home/dashboard-home.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,7 +99,9 @@ import { DashboardHomeComponent } from './screens/dashboard/dashboard-home/dashb
     MatDividerModule,
     MatListModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

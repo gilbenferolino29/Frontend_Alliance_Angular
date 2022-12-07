@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, lastValueFrom, tap } from 'rxjs';
 import { Ticket } from 'src/app/models/ITicket';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateTicketComponentDialog } from '../../create-ticket/create-ticket.component';
@@ -21,7 +21,13 @@ export class UserHomeComponent implements OnInit {
   showFiller = false;
   public displayedColumns = ['ticketID', 'assignee', 'tracker', 'subject', 'description', 'status', 'createdAt', 'view', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Ticket>;
-  tickets: any = [];
+
+  pageIndex: number = 0;
+  pageSize: number = 8;
+  count: number = 0;
+
+  isLoading = true;
+
   csvHttpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'Application/json; charset=UTF-8'
@@ -36,22 +42,32 @@ export class UserHomeComponent implements OnInit {
     private _snackbar: MatSnackBar
   ) { }
 
-  async ngOnInit(): Promise<void> {
-    await this.populate();
-    console.log(this.dataSource.data);
+  ngOnInit(): void {
+    this.getAllTickets(this.pageIndex, this.pageSize);
   }
   
   nav(destination: string) {
     this.router.navigate([destination]);
   }
 
-  async populate(){
-    this.dataSource.data = await firstValueFrom(this.queryService.getAllTickets()) as Ticket[]; 
-  }
-
   logout() {
     localStorage.clear();
     window.location.reload();
+  }
+
+  getAllTickets(page: number, size: number) {
+    this.isLoading = true;
+    this.queryService.getAllTickets(page, size).pipe(tap((res: any) => {
+      this.isLoading = false;
+      this.dataSource.data = res.content;
+      this.count = res.totalElements;
+    })).subscribe();
+  }
+
+  changePage(event: any) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getAllTickets(event.pageIndex, event.pageSize);
   }
 
   openDialogCreate() {
@@ -62,8 +78,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data != null) {
-        this.dataSource.data.push(result.data);
-        this.dataSource._updateChangeSubscription();
+        this.getAllTickets(this.pageIndex, this.pageSize);
         this.openSnackbar('Ticket created.', 'Dismiss');
       }
     });
@@ -107,10 +122,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data == true) {
-        const index = this.dataSource.data.findIndex(x => x.ticketID === ticket.ticketID);
-        this.dataSource.data.splice(index,1)
-        this.dataSource._updateChangeSubscription();
-
+        this.getAllTickets(this.pageIndex, this.pageSize);
         this.openSnackbar('Ticket deleted.', 'Dismiss');
       }
     });

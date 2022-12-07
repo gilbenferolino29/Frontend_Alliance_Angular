@@ -34,7 +34,10 @@ export class DashboardHomeComponent implements OnInit {
     this.agingTickets.data = await firstValueFrom(this.queryService.getUserAgingTickets(this.user!.toString())) as Ticket[];
   }
 
-  logout() {}
+  logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
 
   openDialogView(ticket: any) {}
 

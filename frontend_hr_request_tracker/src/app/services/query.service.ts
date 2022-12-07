@@ -15,8 +15,8 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.ticketInfo + id);
   }
   
-  public getAllTickets(){
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTickets);
+  public getAllTickets(page: number, size: number){
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTickets + '?page=' + page + '&size=' + size);
   }
 
   public createTicket(data:any){
