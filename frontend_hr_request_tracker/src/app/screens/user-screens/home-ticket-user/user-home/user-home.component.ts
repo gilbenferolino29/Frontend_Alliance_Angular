@@ -11,6 +11,7 @@ import { UpdateTicketComponent } from '../../../common/modals/update-ticket/upda
 import { ViewTicketComponent } from '../../../common/modals/view-ticket/view-ticket.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,8 @@ export class UserHomeComponent implements OnInit {
   pageIndex: number = 0;
   pageSize: number = 8;
   count: number = 0;
+  active: any = '';
+  direction: any = '';
 
   user = localStorage.getItem('user');
   role = localStorage.getItem('role');
@@ -46,9 +49,9 @@ export class UserHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getAllTickets(this.pageIndex, this.pageSize);
+    this.getAllTickets(this.pageIndex, this.pageSize, '', '');
   }
-  
+
   nav(destination: string) {
     this.router.navigate([destination]);
   }
@@ -58,9 +61,9 @@ export class UserHomeComponent implements OnInit {
     window.location.reload();
   }
 
-  getAllTickets(page: number, size: number) {
+  getAllTickets(page: number, size: number, active: any, direction: any) {
     this.isLoading = true;
-    this.queryService.getAllTickets(page, size).pipe(tap((res: any) => {
+    this.queryService.getAllTickets(page, size, active, direction).pipe(tap((res: any) => {
       this.isLoading = false;
       this.dataSource.data = res.content;
       this.count = res.totalElements;
@@ -70,7 +73,13 @@ export class UserHomeComponent implements OnInit {
   changePage(event: any) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.getAllTickets(event.pageIndex, event.pageSize);
+    this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+  }
+
+  sortData(event: any) {
+    this.active = event.active;
+    this.direction = event.direction;
+    this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
   }
 
   openDialogCreate() {
@@ -81,7 +90,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data != null) {
-        this.getAllTickets(this.pageIndex, this.pageSize);
+        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
         this.openSnackbar('Ticket created.', 'Dismiss');
       }
     });
@@ -125,7 +134,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data == true) {
-        this.getAllTickets(this.pageIndex, this.pageSize);
+        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
         this.openSnackbar('Ticket deleted.', 'Dismiss');
       }
     });
