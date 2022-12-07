@@ -15,6 +15,7 @@ export class GlobalConstants {
         //GET
     public static ticketInfo = "ticket/";
     public static allTickets = "tickets/";
+    public static allTicketsByStatus = "tickets/status/";
     public static userTickets = "tickets/user/";
     public static userAgingTickets = "aging/";
     public static allAgingTickets = "aging/";

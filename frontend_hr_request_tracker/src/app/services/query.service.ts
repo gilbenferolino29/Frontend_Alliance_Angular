@@ -20,6 +20,11 @@ export class QueryService {
       GlobalConstants.allTickets + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
   }
 
+  public getAllTicketsByStatus(id: string, page: number, size: number, active: any, direction: any) {
+    return this.httpService.get(GlobalConstants.server_url +
+      GlobalConstants.allTicketsByStatus + id + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
+  }
+
   public getUserTickets(id: string, page: number, size: number) {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userTickets + id + '?page=' + page + '&size=' + size);
   }

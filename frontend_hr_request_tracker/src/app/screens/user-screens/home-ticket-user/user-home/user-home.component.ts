@@ -22,7 +22,7 @@ import { User } from 'src/app/models/IUser';
 })
 export class UserHomeComponent implements OnInit {
   showFiller = false;
-  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'createdAt', 'view', 'update', 'delete', 'action'];
+  public displayedColumns = ['ticketID', 'tracker', 'status', 'subject', 'assignee', 'createdAt', 'view', 'update', 'delete', 'action'];
   public dataSource = new MatTableDataSource<Ticket>;
 
   pageIndex: number = 0;
@@ -38,6 +38,8 @@ export class UserHomeComponent implements OnInit {
 
   statusList: any = [];
   assigneeList: any = [];
+
+  statusFilter: any;
 
   csvHttpOptions = {
     headers: new HttpHeaders({
@@ -72,11 +74,19 @@ export class UserHomeComponent implements OnInit {
 
   getAllTickets(page: number, size: number, active: any, direction: any) {
     this.isLoading = true;
-    this.queryService.getAllTickets(page, size, active, direction).pipe(tap((res: any) => {
-      this.isLoading = false;
-      this.dataSource.data = res.content;
-      this.count = res.totalElements;
-    })).subscribe();
+    if(!this.statusFilter) {
+      this.queryService.getAllTickets(page, size, active, direction).pipe(tap((res: any) => {
+        this.isLoading = false;
+        this.dataSource.data = res.content;
+        this.count = res.totalElements;
+      })).subscribe();
+    } else {
+      this.queryService.getAllTicketsByStatus(this.statusFilter, page, size, active, direction).pipe(tap((res: any) => {
+        this.isLoading = false;
+        this.dataSource.data = res.content;
+        this.count = res.totalElements;
+      })).subscribe();
+    }
   }
 
   changePage(event: any) {
@@ -156,17 +166,24 @@ export class UserHomeComponent implements OnInit {
   }
 
   changeStatus(status: Status, ticket: Ticket) {
-    let formData: FormData = new FormData();
-    let ticketID = ticket.ticketID.toString();
+    if(status.statusID != ticket.status.statusID) {
+      let formData: FormData = new FormData();
+      let ticketID = ticket.ticketID.toString();
+    
+      formData.append('status', status.statusID.toString());
   
-    formData.append('status', status.statusID.toString());
+      this.queryService.updateStatus(ticketID, formData).subscribe((res: any) => {
+        if(res.data != null) {
+          this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+          this.openSnackbar('Status updated.', 'Dismiss');
+        }
+      });
+    }
+  }
 
-    this.queryService.updateStatus(ticketID, formData).subscribe((res: any) => {
-      if(res.data != null) {
-        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
-        this.openSnackbar('Status updated.', 'Dismiss');
-      }
-    });
+  filterStatus(event: any) {
+    this.pageIndex = 0;
+    this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
   }
 
   getAssignees() {
@@ -178,17 +195,19 @@ export class UserHomeComponent implements OnInit {
   }
 
   changeAssignee(assignee: User, ticket: Ticket) {
-    let formData: FormData = new FormData();
-    let ticketID = ticket.ticketID.toString();
-
-    formData.append('assignee', assignee.userID.toString());
-
-    this.queryService.updateAssignee(ticketID, formData).subscribe((res: any) => {
-      if(res.data != null) {
-        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
-        this.openSnackbar('Assignee updated.', 'Dismiss');
-      }
-    });
+    if(assignee.userID != ticket.assignee.userID) {
+      let formData: FormData = new FormData();
+      let ticketID = ticket.ticketID.toString();
+  
+      formData.append('assignee', assignee.userID.toString());
+  
+      this.queryService.updateAssignee(ticketID, formData).subscribe((res: any) => {
+        if(res.data != null) {
+          this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+          this.openSnackbar('Assignee updated.', 'Dismiss');
+        }
+      });
+    }
   }
 
   exportAllTicketsCsv() {
