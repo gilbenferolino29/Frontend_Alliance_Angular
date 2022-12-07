@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { firstValueFrom, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { Ticket } from 'src/app/models/ITicket';
 import { QueryService } from 'src/app/services/query.service';
 import { UpdateTicketComponent } from '../../common/modals/update-ticket/update-ticket.component';
@@ -23,11 +23,15 @@ export class DashboardHomeComponent implements OnInit {
   ticketsPageIndex = 0;
   ticketsPageSize = 5;
   ticketsCount = 0;
+  ticketsActive = '';
+  ticketsDirection = '';
   isTicketsLoading = true;
 
   agingPageIndex = 0;
   agingPageSize = 5;
   agingCount = 0;
+  agingActive = '';
+  agingDirection = '';
   isAgingLoading = true;
 
   constructor(
@@ -38,30 +42,28 @@ export class DashboardHomeComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.getUserTickets(this.ticketsPageIndex, this.ticketsPageSize);
-    this.getAgingTickets(this.agingPageIndex, this.agingPageSize);
+    this.getUserTickets(this.ticketsPageIndex, this.ticketsPageSize, this.ticketsActive, this.ticketsDirection);
+    this.getAgingTickets(this.agingPageIndex, this.agingPageSize, this.agingActive, this.agingDirection);
   }
 
-  getUserTickets(page: number, size: number) {
+  getUserTickets(page: number, size: number, active: any, direction: any) {
     this.isTicketsLoading = true;
-    this.queryService.getUserTickets(this.user!.toString(), page, size).pipe(tap((res: any) => {
+    this.queryService.getUserTickets(this.user!.toString(), page, size, active, direction).pipe(tap((res: any) => {
       this.isTicketsLoading = false;
       this.userTickets.data = res.content;
       this.ticketsCount = res.totalElements;
-
-      console.log(this.userTickets.data);
     })).subscribe();
   }
 
   changeTicketPage(event: any) {
     this.ticketsPageIndex = event.pageIndex;
     this.ticketsPageSize = event.pageSize;
-    this.getUserTickets(event.pageIndex, event.pageSize);
+    this.getUserTickets(this.ticketsPageIndex, this.ticketsPageSize, this.ticketsActive, this.ticketsDirection);
   }
 
-  getAgingTickets(page: number, size: number) {
+  getAgingTickets(page: number, size: number, active: any, direction: any) {
     this.isAgingLoading = true;
-    this.queryService.getUserAgingTickets(this.user!.toString(), page, size).pipe(tap((res: any) => {
+    this.queryService.getUserAgingTickets(this.user!.toString(), page, size, active, direction).pipe(tap((res: any) => {
       this.isAgingLoading = false;
       this.agingTickets.data = res.content;
       this.agingCount = res.totalElements;
@@ -71,7 +73,19 @@ export class DashboardHomeComponent implements OnInit {
   changeAgingPage(event: any) {
     this.agingPageIndex = event.pageIndex;
     this.agingPageSize = event.pageSize;
-    this.getAgingTickets(event.pageIndex, event.pageSize);
+    this.getAgingTickets(this.agingPageIndex, this.agingPageSize, this.agingActive, this.agingDirection);
+  }
+
+  sortAllTickets(event: any) {
+    this.ticketsActive = event.active;
+    this.ticketsDirection = event.direction;
+    this.getUserTickets(this.ticketsPageIndex, this.ticketsPageSize, this.ticketsActive, this.ticketsDirection);
+  }
+
+  sortAgingTickets(event: any) {
+    this.agingActive = event.active;
+    this.agingDirection = event.direction;
+    this.getAgingTickets(this.agingPageIndex, this.agingPageSize, this.agingActive, this.agingDirection);
   }
 
   logout() {
