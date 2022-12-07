@@ -35,15 +35,18 @@
         <button mat-menu-item (click)="exportCategoryCountCsv()">Ticket Count per Category</button>
       </mat-menu>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Status</mat-label>
-        <mat-select (click)="getStatus()" (selectionChange)="filterStatus($event)" [(ngModel)]="statusFilter">
-          <mat-option></mat-option>
-          <mat-option *ngFor="let status of statusList" [value]="status.statusID">
-            {{ status.statusName }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div class="filters">
+        <label for="filterBar">Filters</label>
+        <mat-form-field appearance="fill" id="filterBar">
+          <mat-label>Status</mat-label>
+          <mat-select (click)="getStatus()" (selectionChange)="filterStatus($event)" [(ngModel)]="statusFilter">
+            <mat-option></mat-option>
+            <mat-option *ngFor="let status of statusList" [value]="status.statusID">
+              {{ status.statusName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
     <div id="table-container">

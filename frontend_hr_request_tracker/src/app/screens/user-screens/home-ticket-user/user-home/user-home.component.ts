@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { firstValueFrom, lastValueFrom, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { Ticket } from 'src/app/models/ITicket';
 import { QueryService } from 'src/app/services/query.service';
 import { CreateTicketComponentDialog } from '../../create-ticket/create-ticket.component';
@@ -11,7 +11,6 @@ import { UpdateTicketComponent } from '../../../common/modals/update-ticket/upda
 import { ViewTicketComponent } from '../../../common/modals/view-ticket/view-ticket.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
-import { MatSort } from '@angular/material/sort';
 import { Status } from 'src/app/models/IStatus';
 import { User } from 'src/app/models/IUser';
 
