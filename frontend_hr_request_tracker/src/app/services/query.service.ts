@@ -24,9 +24,9 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userTickets + id + '?page=' + page + '&size=' + size);
   }
 
-  public getUserAgingTickets(id: string, page: number, size: number, sort?: any) {
+  public getUserAgingTickets(id: string, page: number, size: number) {
     return this.httpService.get(GlobalConstants.server_url + 
-      GlobalConstants.userAgingTickets + id  + '?page=' + page + '&size=' + size + '&sort=' + sort.active + ',' + sort.direction);
+      GlobalConstants.userAgingTickets + id  + '?page=' + page + '&size=' + size);
   }
 
   public getAllAgingTickets() {
@@ -39,6 +39,14 @@ export class QueryService {
 
   public updateTicket(data:any){
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.updateTicket, data);
+  }
+
+  public updateAssignee(id: string, data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.updateAssignee + id, data);
+  }
+
+  public updateStatus(id: string, data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.updateStatus + id, data);
   }
 
   public deleteTicket(id:string){

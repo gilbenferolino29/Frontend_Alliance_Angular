@@ -25,6 +25,8 @@ export class GlobalConstants {
         //POST
     public static createTicket = "tickets/create/";
     public static updateTicket = "tickets/update/";
+    public static updateAssignee = "tickets/update/assignee/";
+    public static updateStatus = "tickets/update/status/";
         //DELETE
     public static deleteTicket = "tickets/delete/";
 

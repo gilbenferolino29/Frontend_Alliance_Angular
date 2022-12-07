@@ -12,6 +12,8 @@ import { ViewTicketComponent } from '../../../common/modals/view-ticket/view-tic
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
 import { MatSort } from '@angular/material/sort';
+import { Status } from 'src/app/models/IStatus';
+import { User } from 'src/app/models/IUser';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +22,7 @@ import { MatSort } from '@angular/material/sort';
 })
 export class UserHomeComponent implements OnInit {
   showFiller = false;
-  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'createdAt', 'view', 'update', 'delete'];
+  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'createdAt', 'view', 'update', 'delete', 'action'];
   public dataSource = new MatTableDataSource<Ticket>;
 
   pageIndex: number = 0;
@@ -34,6 +36,9 @@ export class UserHomeComponent implements OnInit {
 
   isLoading = true;
 
+  statusList: any = [];
+  assigneeList: any = [];
+
   csvHttpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'Application/json; charset=UTF-8'
@@ -46,9 +51,13 @@ export class UserHomeComponent implements OnInit {
     private queryService: QueryService,
     public dialog: MatDialog, 
     private _snackbar: MatSnackBar
-  ) { }
+  ) { 
+  }
 
   ngOnInit(): void {
+    if(this.role != 'ADMIN') {
+      this.displayedColumns.splice(9, 1);
+    }
     this.getAllTickets(this.pageIndex, this.pageSize, '', '');
   }
 
@@ -117,9 +126,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data != null) {
-        const index = this.dataSource.data.findIndex(x => x.ticketID === result.data.ticketID);
-        this.dataSource.data[index] = result.data;
-        this.dataSource._updateChangeSubscription();
+        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
         this.openSnackbar('Ticket updated.', 'Dismiss');
       }
     });
@@ -136,6 +143,50 @@ export class UserHomeComponent implements OnInit {
       if(result.data == true) {
         this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
         this.openSnackbar('Ticket deleted.', 'Dismiss');
+      }
+    });
+  }
+
+  getStatus() {
+    if(this.statusList.length <= 0) {
+      this.queryService.getAllStatus().subscribe(res => {
+        this.statusList = res;
+      });
+    }
+  }
+
+  changeStatus(status: Status, ticket: Ticket) {
+    let formData: FormData = new FormData();
+    let ticketID = ticket.ticketID.toString();
+  
+    formData.append('status', status.statusID.toString());
+
+    this.queryService.updateStatus(ticketID, formData).subscribe((res: any) => {
+      if(res.data != null) {
+        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+        this.openSnackbar('Status updated.', 'Dismiss');
+      }
+    });
+  }
+
+  getAssignees() {
+    if(this.assigneeList.length <= 0) {
+      this.queryService.getAllUsers().subscribe(res => {
+        this.assigneeList = res;
+      });
+    }
+  }
+
+  changeAssignee(assignee: User, ticket: Ticket) {
+    let formData: FormData = new FormData();
+    let ticketID = ticket.ticketID.toString();
+
+    formData.append('assignee', assignee.userID.toString());
+
+    this.queryService.updateAssignee(ticketID, formData).subscribe((res: any) => {
+      if(res.data != null) {
+        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+        this.openSnackbar('Assignee updated.', 'Dismiss');
       }
     });
   }
