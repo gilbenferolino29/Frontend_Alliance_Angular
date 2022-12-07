@@ -46,6 +46,7 @@ import { UpdateUserComponent } from './screens/users/update-user/update-user.com
 import { DeleteUserComponent } from './screens/users/delete-user/delete-user.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { DashboardHomeComponent } from './screens/dashboard/dashboard-home/dashboard-home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +72,8 @@ import { MatMenuModule } from '@angular/material/menu';
     DeleteTrackerComponent,
     CreateUserComponent,
     UpdateUserComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    DashboardHomeComponent
   ],
   imports: [
     BrowserModule,

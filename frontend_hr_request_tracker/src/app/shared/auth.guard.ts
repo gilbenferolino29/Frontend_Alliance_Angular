@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
 
     var isAuthenticated = this.authService.authenticate(user.toString()).pipe(map(result => {
       if(result != null) {
-        if(route.data['role'] && route.data['role'] != role) {
+        if(route.data['role'] && route.data['role'] != role) {  // Check if isAdmin
           this.router.navigate(['']);
           return false;
         }

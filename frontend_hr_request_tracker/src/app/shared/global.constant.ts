@@ -37,6 +37,10 @@ export class GlobalConstants {
         //GET
     public static userInfo = "user/";
     public static allUsers = "users/";
+    public static userTickets = "user/tickets/";
+    public static userAgingTickets = "user/aging-tickets/";
+    public static allAgingTickets = "admin/aging-tickets/";
+    
     public static login = "login/"
     public static createUser = "users/create/";
     public static updateUser = "users/update/";

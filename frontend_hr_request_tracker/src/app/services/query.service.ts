@@ -71,6 +71,18 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allUsers);
   }
 
+  public getUserTickets(id: string) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userTickets + id);
+  }
+
+  public getUserAgingTickets(id: string) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userAgingTickets + id);
+  }
+
+  public getAllAgingTickets() {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allAgingTickets);
+  }
+
   public createUser(data: any) {
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createUser, data);
   }

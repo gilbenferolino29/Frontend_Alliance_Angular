@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
         })
         ).subscribe((res: any) => {
           if(res.status === "SUCCESS") {
-            this.router.navigate(['tickets']);
+            this.router.navigate(['dashboard']);
           }
       });
     } else {
