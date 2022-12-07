@@ -19,12 +19,15 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class UserHomeComponent implements OnInit {
   showFiller = false;
-  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'subject', 'description', 'status', 'createdAt', 'view', 'update', 'delete'];
+  public displayedColumns = ['ticketID', 'assignee', 'tracker', 'status', 'subject', 'createdAt', 'view', 'update', 'delete'];
   public dataSource = new MatTableDataSource<Ticket>;
 
   pageIndex: number = 0;
   pageSize: number = 8;
   count: number = 0;
+
+  user = localStorage.getItem('user');
+  role = localStorage.getItem('role');
 
   isLoading = true;
 
@@ -162,6 +165,13 @@ export class UserHomeComponent implements OnInit {
       link.download = 'count_user.csv';
       link.click();
     });
+  }
+
+  isAuthorized(ticket: Ticket) {
+    if(ticket.assignee.userID.toString() == this.user || this.role == "ADMIN") {
+      return true;
+    }
+    return false;
   }
 
   openSnackbar(message: string, action: string) {

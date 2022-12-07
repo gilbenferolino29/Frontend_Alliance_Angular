@@ -15,6 +15,9 @@ export class GlobalConstants {
         //GET
     public static ticketInfo = "ticket/";
     public static allTickets = "tickets/";
+    public static userTickets = "tickets/user/";
+    public static userAgingTickets = "aging/";
+    public static allAgingTickets = "aging/";
     public static exportAllTickets = "tickets/all/"
     public static exportAgingByCategory = "tickets/category/aging/";
     public static exportCategoryCount = "tickets/category/count/";
@@ -37,9 +40,6 @@ export class GlobalConstants {
         //GET
     public static userInfo = "user/";
     public static allUsers = "users/";
-    public static userTickets = "user/tickets/";
-    public static userAgingTickets = "user/aging-tickets/";
-    public static allAgingTickets = "admin/aging-tickets/";
     
     public static login = "login/"
     public static createUser = "users/create/";

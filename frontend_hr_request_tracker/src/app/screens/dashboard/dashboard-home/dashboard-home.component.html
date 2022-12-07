@@ -40,10 +40,6 @@
             <th mat-header-cell *matHeaderCellDef> Subject </th>
             <td mat-cell *matCellDef="let element"> <a href="javascript:void(0)" (click)="openDialogView(element)"> {{element.subject }} </a> </td>
           </ng-container>
-          <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.description }}</td>
-          </ng-container>
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
             <td mat-cell *matCellDef="let element"> {{element.status.statusName }} </td>
@@ -72,11 +68,24 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <div *ngIf="isTicketsLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner 
+            color="primary"
+            mode="indeterminate"
+            ></mat-progress-spinner>
+        </div>
+
+        <mat-paginator
+            [length]="ticketsCount"
+            [pageSize]="ticketsPageSize"
+            (page)="changeTicketPage($event)">
+        </mat-paginator>
       </div>
 
       <!-- Aging Tickets Table -->
 
-      <h1 class="container-header">Aging Tickets</h1>
+      <h1 class="container-header">Your Aging Tickets</h1>
       <mat-divider></mat-divider>
     
       <div id="table-container">
@@ -97,10 +106,6 @@
             <th mat-header-cell *matHeaderCellDef> Subject </th>
             <td mat-cell *matCellDef="let element"> <a href="javascript:void(0)" (click)="openDialogView(element)"> {{element.subject }} </a> </td>
           </ng-container>
-          <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.description }}</td>
-          </ng-container>
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
             <td mat-cell *matCellDef="let element"> {{element.status.statusName }} </td>
@@ -129,6 +134,19 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+
+        <div *ngIf="isAgingLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner 
+            color="primary"
+            mode="indeterminate"
+            ></mat-progress-spinner>
+        </div>
+
+        <mat-paginator
+            [length]="agingCount"
+            [pageSize]="agingPageSize"
+            (page)="changeAgingPage($event)">
+        </mat-paginator>
       </div>
   
   </mat-drawer-container>

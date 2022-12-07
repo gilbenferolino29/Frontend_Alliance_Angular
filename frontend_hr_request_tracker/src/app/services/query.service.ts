@@ -19,6 +19,18 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTickets + '?page=' + page + '&size=' + size);
   }
 
+  public getUserTickets(id: string, page: number, size: number) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userTickets + id + '?page=' + page + '&size=' + size);
+  }
+
+  public getUserAgingTickets(id: string, page: number, size: number) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userAgingTickets + id  + '?page=' + page + '&size=' + size);
+  }
+
+  public getAllAgingTickets() {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allAgingTickets);
+  }
+
   public createTicket(data:any){
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createTicket, data);
   }
@@ -70,19 +82,6 @@ export class QueryService {
   public getAllUsers(){
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allUsers);
   }
-
-  public getUserTickets(id: string) {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userTickets + id);
-  }
-
-  public getUserAgingTickets(id: string) {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userAgingTickets + id);
-  }
-
-  public getAllAgingTickets() {
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allAgingTickets);
-  }
-
   public createUser(data: any) {
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createUser, data);
   }

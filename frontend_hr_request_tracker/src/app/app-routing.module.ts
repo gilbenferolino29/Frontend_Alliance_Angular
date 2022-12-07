@@ -37,10 +37,7 @@ const routes: Routes = [
   {
     path: 'tickets',
     component: UserHomeComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: 'ADMIN'
-    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'viewticket',
