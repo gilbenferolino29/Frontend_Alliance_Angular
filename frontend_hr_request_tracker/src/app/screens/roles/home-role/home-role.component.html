@@ -1,3 +1,12 @@
+<h1 class="container-header">Role List</h1>
+<mat-divider></mat-divider>
+
+<div class="demo-button-container">
+  <button mat-raised-button color="primary" (click)="openDialogCreate()">
+    Add Role
+  </button>
+</div>
+
 <div id="table-container">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="role">

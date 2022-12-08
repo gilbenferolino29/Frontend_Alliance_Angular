@@ -1,0 +1,29 @@
+<mat-drawer-container class="container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side" opened="true">
+        <div class="side-container">
+            <div id="profile">
+                <img src="assets/pp.jpg" alt="">
+                <h2>Welcome {{ username }}</h2>
+            </div>
+            
+            <div class="navlinks">
+                <mat-selection-list #navlinks [multiple]="false">
+                    <mat-list-option *ngFor="let navLink of navLinks" [value]="navLink" id="nav-option" (click)="clickNav($event)">
+                        {{ navLink }}
+                    </mat-list-option>
+                    <mat-list-option (click)="logout()" id="nav-option">
+                        Logout
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
+        </div>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+        </button>
+    </div>  
+
+    <router-outlet></router-outlet>
+</mat-drawer-container>

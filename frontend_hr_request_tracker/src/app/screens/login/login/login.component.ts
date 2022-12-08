@@ -59,6 +59,7 @@ export class LoginComponent implements OnInit {
             let tokenData: FormData = new FormData();
             var userID = res1.data.userID;
             var userRole = res1.data.userRole.roleAbbv;
+            var username = res1.data.username;
             var authToken = uuid.v4();
   
             tokenData.append('user', userID.toString());
@@ -66,6 +67,7 @@ export class LoginComponent implements OnInit {
 
             localStorage.setItem('user', userID);
             localStorage.setItem('role', userRole);
+            localStorage.setItem('username', username);
             
             return this.authService.generateToken(tokenData);
           }
@@ -75,7 +77,9 @@ export class LoginComponent implements OnInit {
         })
         ).subscribe((res: any) => {
           if(res.status === "SUCCESS") {
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['dashboard']).then(() => {
+              window.location.reload();
+            });
           }
       });
     } else {

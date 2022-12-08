@@ -1,67 +1,48 @@
-<mat-drawer-container class="container" autosize>
-    <mat-drawer #drawer class="sidenav" mode="side" opened="true">
-      <div class="side-container">
-        <div id="profile">
-          <img src="assets/pp.jpg" alt="">
-          <h2>Welcome User</h2>
-        </div>
-  
-      </div>
-    </mat-drawer>
-  
-      <div class="example-sidenav-content">
-        <button type="button" mat-button (click)="drawer.toggle()">
-          Toggle sidenav
+<h1 class="container-header">User List</h1>
+<mat-divider></mat-divider>
+
+<div class="demo-button-container">
+  <button mat-raised-button color="primary" (click)="openDialogCreate()">
+    Add User
+  </button>
+</div>
+
+<div id="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Username </th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Role </th>
+      <td mat-cell *matCellDef="let element"> {{ element.userRole.roleName }} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{ element.userFName }} {{ element.userLName }} </td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{ element.userEmail }} </td>
+    </ng-container>
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef> Update </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="openDialogUpdate(element)">
+          <mat-icon class="mat-18">system_update</mat-icon>
         </button>
-      </div>
-  
-      <h1 class="container-header">User List</h1>
-      <mat-divider></mat-divider>
-  
-      <div class="demo-button-container">
-        <button mat-raised-button color="primary" (click)="openDialogCreate()">
-          Add User
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="openDialogDelete(element)">
+          <mat-icon class="mat-18">delete</mat-icon>
         </button>
-      </div>
-  
-      <div id="table-container">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-          <ng-container matColumnDef="username">
-            <th mat-header-cell *matHeaderCellDef> Username </th>
-            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-          </ng-container>
-          <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef> Role </th>
-            <td mat-cell *matCellDef="let element"> {{ element.userRole.roleName }} </td>
-          </ng-container>
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{ element.userFName }} {{ element.userLName }} </td>
-          </ng-container>
-          <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{ element.userEmail }} </td>
-          </ng-container>
-          <ng-container matColumnDef="update">
-            <th mat-header-cell *matHeaderCellDef> Update </th>
-            <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="accent" (click)="openDialogUpdate(element)">
-                <mat-icon class="mat-18">system_update</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="delete">
-            <th mat-header-cell *matHeaderCellDef> Delete </th>
-            <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="warn" (click)="openDialogDelete(element)">
-                <mat-icon class="mat-18">delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-  
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-      </div>
-  
-  </mat-drawer-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>

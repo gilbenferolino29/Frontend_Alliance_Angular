@@ -51,6 +51,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { AllAgingTicketsComponent } from './screens/dashboard/all-aging-tickets/all-aging-tickets.component';
+import { SidenavComponent } from './screens/common/sidenav/sidenav.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +79,8 @@ import { AllAgingTicketsComponent } from './screens/dashboard/all-aging-tickets/
     UpdateUserComponent,
     DeleteUserComponent,
     DashboardHomeComponent,
-    AllAgingTicketsComponent
+    AllAgingTicketsComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
