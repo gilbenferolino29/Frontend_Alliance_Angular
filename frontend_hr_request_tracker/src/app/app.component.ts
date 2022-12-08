@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend_hr_request_tracker';
+  
+  logout() {
+    localStorage.clear();
+    window.location.reload();
+  }
+
+  isAuthenticated() {
+    if(localStorage.getItem('user')) {
+      return true;
+    }
+    return false;
+  }
 }

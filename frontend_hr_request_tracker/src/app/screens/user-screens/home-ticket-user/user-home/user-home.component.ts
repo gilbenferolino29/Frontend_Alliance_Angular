@@ -65,12 +65,7 @@ export class UserHomeComponent implements OnInit {
   nav(destination: string) {
     this.router.navigate([destination]);
   }
-
-  logout() {
-    localStorage.clear();
-    window.location.reload();
-  }
-
+  
   getAllTickets(page: number, size: number, active: any, direction: any) {
     this.isLoading = true;
     if(!this.statusFilter) {
