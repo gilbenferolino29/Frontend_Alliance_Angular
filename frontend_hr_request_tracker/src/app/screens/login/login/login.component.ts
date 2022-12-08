@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { mergeMap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { QueryService } from 'src/app/services/query.service';
 import * as uuid from 'uuid';
 
 @Component({
@@ -16,11 +15,13 @@ export class LoginComponent implements OnInit {
     email: ['', [Validators.required]],
     password: ['', [Validators.required]]
   });
+
+  loginAttempt: boolean = false;
+  loginFailed: boolean = false;
   
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private queryService: QueryService,
     private authService: AuthService
   ) { }
 
@@ -46,12 +47,12 @@ export class LoginComponent implements OnInit {
 
   login() {
     if(this.form.valid) {
+      this.loginAttempt = true;
       let formData: FormData = new FormData();
 
       formData.append('username', this.f.email.value != null ? this.f.email.value.toString() : '');
       formData.append('password', this.f.password.value != null ? this.f.password.value.toString() : '');
       
-
       this.authService.login(formData).pipe(
         mergeMap((res1: any) => {
           if(res1.status === "SUCCESS") {
@@ -69,6 +70,7 @@ export class LoginComponent implements OnInit {
             return this.authService.generateToken(tokenData);
           }
 
+          this.loginFailed = true;
           throw('User not found.');
         })
         ).subscribe((res: any) => {
