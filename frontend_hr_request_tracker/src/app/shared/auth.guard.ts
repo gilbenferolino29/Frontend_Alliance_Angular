@@ -25,8 +25,6 @@ export class AuthGuard implements CanActivate {
     const user = localStorage.getItem('user') || 0;
     const role = localStorage.getItem('role') || '';
 
-    console.log(role);
-
     var isAuthenticated = this.authService.authenticate(user.toString()).pipe(map(result => {
       if(result != null) {
         if(route.data['role'] && route.data['role'] != role) {  // Check if isAdmin
