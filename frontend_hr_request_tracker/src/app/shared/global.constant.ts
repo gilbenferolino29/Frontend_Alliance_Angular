@@ -19,10 +19,15 @@ export class GlobalConstants {
     public static userTickets = "tickets/user/";
     public static userAgingTickets = "aging/";
     public static allAgingTickets = "aging/";
-    public static exportAllTickets = "tickets/all/"
-    public static exportAgingByCategory = "tickets/category/aging/";
-    public static exportCategoryCount = "tickets/category/count/";
-    public static exportUserCount = "tickets/user/count";
+
+    public static agingByCategory = "tickets/category/aging";
+    public static categoryTicketCount = "tickets/category/count";
+    public static userTicketCount = "tickets/user/count";
+
+    public static exportAllTickets = "tickets/all/export"
+    public static exportAgingByCategory = "tickets/category/aging/export";
+    public static exportCategoryCount = "tickets/category/count/export";
+    public static exportUserCount = "tickets/user/count/export";
         //POST
     public static createTicket = "tickets/create/";
     public static updateTicket = "tickets/update/";

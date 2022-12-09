@@ -214,15 +214,6 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  exportAgingCategoryCsv() {
-    this.queryService.exportAllAgingCategory(this.csvHttpOptions).subscribe(res => {
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
-      link.download = 'aging_by_category.csv';
-      link.click();
-    });
-  }
-
   exportCategoryCountCsv() {
     this.queryService.exportCountCategory(this.csvHttpOptions).subscribe(res => {
       const link = document.createElement('a');

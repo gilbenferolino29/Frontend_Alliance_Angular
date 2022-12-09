@@ -6,16 +6,10 @@
     Create Ticket
   </button>
 
-  <button mat-raised-button color="primary" [matMenuTriggerFor]="menu">
+  <button mat-raised-button color="primary" (click)="exportAllTicketsCsv()">
     Export to CSV
   </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="exportAllTicketsCsv()">Generate All Tickets</button>
-    <button mat-menu-item (click)="exportAgingCategoryCsv()">Aging Tickets by Category</button>
-    <button mat-menu-item (click)="exportUserCountCsv()">Ticket Count per User</button>
-    <button mat-menu-item (click)="exportCategoryCountCsv()">Ticket Count per Category</button>
-  </mat-menu>
-  
+
   <div class="search">
     <mat-form-field appearance="fill" id="searchBar">
       <mat-label>Search</mat-label>
@@ -133,4 +127,10 @@
     [pageSize]="pageData.size"
     (page)="changePage($event)">
   </mat-paginator>
+
+  <div class="footer-links">
+    <a href="/reports/aging">Aging Tickets by Category</a>
+    <a href="/reports/user-count">User Ticket Count</a>
+    <a href="">Category Ticket Count</a>
+  </div>
 </div>

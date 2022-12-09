@@ -75,13 +75,18 @@ export class QueryService {
     return this.httpService.delete(GlobalConstants.server_url + GlobalConstants.deleteTicket + id);
   }
 
-  //TICKET TYPE REQUESTS
-  public getTicketTypeInfo(id:string){
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.ticketTypeInfo + id);
+  public getAllAgingByCategory() {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.agingByCategory);
   }
-  public getAllTicketTypes(){
-    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTicketTypes)
+
+  public getAllCountCategory() {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.categoryTicketCount);
   }
+
+  public getAllCountUser() {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.userTicketCount);
+  }
+
   public exportAllTickets(httpOptions: any) {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.exportAllTickets, httpOptions);
   }
@@ -95,6 +100,13 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.exportUserCount, httpOptions);
   }
 
+  //TICKET TYPE REQUESTS
+  public getTicketTypeInfo(id:string){
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.ticketTypeInfo + id);
+  }
+  public getAllTicketTypes(){
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.allTicketTypes)
+  }
   public createTicketType(data: any) {
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.createTicketType, data);
   }
