@@ -15,14 +15,21 @@
     <button mat-menu-item (click)="exportUserCountCsv()">Ticket Count per User</button>
     <button mat-menu-item (click)="exportCategoryCountCsv()">Ticket Count per Category</button>
   </mat-menu>
+  
+  <div class="search">
+    <mat-form-field appearance="fill" id="searchBar">
+      <mat-label>Search</mat-label>
+      <input type="text" matInput (change)="searchKey($event)">
+    </mat-form-field>
+  </div>
 
   <div class="filters">
     <label for="filterBar">Filters</label>
     <mat-form-field appearance="fill" id="filterBar">
       <mat-label>Status</mat-label>
-      <mat-select (click)="getStatus()" (selectionChange)="filterStatus($event)" [(ngModel)]="statusFilter">
+      <mat-select (click)="getStatus()" (selectionChange)="filterStatus($event)">
         <mat-option></mat-option>
-        <mat-option *ngFor="let status of statusList" [value]="status.statusID">
+        <mat-option *ngFor="let status of statusList" [value]="status.statusName">
           {{ status.statusName }}
         </mat-option>
       </mat-select>
@@ -122,8 +129,8 @@
   </div>
 
   <mat-paginator
-    [length]="count"
-    [pageSize]="pageSize"
+    [length]="pageData.count"
+    [pageSize]="pageData.size"
     (page)="changePage($event)">
   </mat-paginator>
 </div>

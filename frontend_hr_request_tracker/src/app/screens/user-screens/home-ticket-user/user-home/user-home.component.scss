@@ -128,7 +128,16 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   margin-right: 0.5%;
 }
 
+.search {
+  margin-left: 1%;
+  display: inline;
+}
+
+#searchBar {
+  width: 50%;
+}
+
 .filters {
   display:inline;
-  margin-left: 54%;
+  margin-left: 2%;
 }

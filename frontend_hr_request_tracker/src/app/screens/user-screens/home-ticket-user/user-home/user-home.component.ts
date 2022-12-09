@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpHeaders } from '@angular/common/http';
 import { Status } from 'src/app/models/IStatus';
 import { User } from 'src/app/models/IUser';
+import { PageData } from 'src/app/models/PageData';
 
 @Component({
   selector: 'app-home',
@@ -24,11 +25,14 @@ export class UserHomeComponent implements OnInit {
   public displayedColumns = ['ticketID', 'tracker', 'status', 'subject', 'assignee', 'createdAt', 'view', 'update', 'delete', 'action'];
   public dataSource = new MatTableDataSource<Ticket>;
 
-  pageIndex: number = 0;
-  pageSize: number = 8;
-  count: number = 0;
-  active: any = '';
-  direction: any = '';
+  defaultIndex = 0;
+  defaultSize = 8;
+  defaultCount = 0;
+  defaultActive = '';
+  defaultDirection = '';
+
+  pageData: PageData = new PageData(this.defaultIndex, this.defaultSize, 
+    this.defaultCount, this.defaultActive, this.defaultDirection, null, null);
 
   user = localStorage.getItem('user');
   role = localStorage.getItem('role');
@@ -37,8 +41,6 @@ export class UserHomeComponent implements OnInit {
 
   statusList: any = [];
   assigneeList: any = [];
-
-  statusFilter: any;
 
   csvHttpOptions = {
     headers: new HttpHeaders({
@@ -59,40 +61,32 @@ export class UserHomeComponent implements OnInit {
     if(this.role != 'ADMIN') {
       this.displayedColumns.splice(9, 1);
     }
-    this.getAllTickets(this.pageIndex, this.pageSize, '', '');
+    this.getAllTickets();
   }
 
   nav(destination: string) {
     this.router.navigate([destination]);
   }
   
-  getAllTickets(page: number, size: number, active: any, direction: any) {
+  getAllTickets() {
     this.isLoading = true;
-    if(!this.statusFilter) {
-      this.queryService.getAllTickets(page, size, active, direction).pipe(tap((res: any) => {
-        this.isLoading = false;
-        this.dataSource.data = res.content;
-        this.count = res.totalElements;
-      })).subscribe();
-    } else {
-      this.queryService.getAllTicketsByStatus(this.statusFilter, page, size, active, direction).pipe(tap((res: any) => {
-        this.isLoading = false;
-        this.dataSource.data = res.content;
-        this.count = res.totalElements;
-      })).subscribe();
-    }
+    this.queryService.getAllTickets(this.pageData).pipe(tap((res: any) => {
+      this.isLoading = false;
+      this.dataSource.data = res.content;
+      this.pageData.count = res.totalElements;
+    })).subscribe();
   }
 
   changePage(event: any) {
-    this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+    this.pageData.index = event.pageIndex;
+    this.pageData.size = event.pageSize;
+    this.getAllTickets();
   }
 
   sortData(event: any) {
-    this.active = event.active;
-    this.direction = event.direction;
-    this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+    this.pageData.active = event.active;
+    this.pageData.direction = event.direction;
+    this.getAllTickets();
   }
 
   openDialogCreate() {
@@ -103,7 +97,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data != null) {
-        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+        this.getAllTickets();
         this.openSnackbar('Ticket created.', 'Dismiss');
       }
     });
@@ -130,7 +124,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data != null) {
-        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+        this.getAllTickets();
         this.openSnackbar('Ticket updated.', 'Dismiss');
       }
     });
@@ -145,7 +139,7 @@ export class UserHomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result.data == true) {
-        this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+        this.getAllTickets();
         this.openSnackbar('Ticket deleted.', 'Dismiss');
       }
     });
@@ -168,7 +162,7 @@ export class UserHomeComponent implements OnInit {
   
       this.queryService.updateStatus(ticketID, formData).subscribe((res: any) => {
         if(res.data != null) {
-          this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+          this.getAllTickets();
           this.openSnackbar('Status updated.', 'Dismiss');
         }
       });
@@ -176,8 +170,15 @@ export class UserHomeComponent implements OnInit {
   }
 
   filterStatus(event: any) {
-    this.pageIndex = 0;
-    this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+    this.pageData.filter = event.value ? event.value.toLowerCase() : null;
+    this.pageData.index = 0;
+    this.getAllTickets();
+  }
+
+  searchKey(event: any) {
+    this.pageData.search = event.target.value ? event.target.value.toLowerCase() : null;
+    this.pageData.index = 0;
+    this.getAllTickets();
   }
 
   getAssignees() {
@@ -197,7 +198,7 @@ export class UserHomeComponent implements OnInit {
   
       this.queryService.updateAssignee(ticketID, formData).subscribe((res: any) => {
         if(res.data != null) {
-          this.getAllTickets(this.pageIndex, this.pageSize, this.active, this.direction);
+          this.getAllTickets();
           this.openSnackbar('Assignee updated.', 'Dismiss');
         }
       });

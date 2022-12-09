@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PageData } from '../models/PageData';
 import { GlobalConstants } from '../shared/global.constant';
 import { HttpService } from './http.service';
 
@@ -15,16 +16,22 @@ export class QueryService {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.ticketInfo + id);
   }
   
-  public getAllTickets(page: number, size: number, active: any, direction: any){
-    return this.httpService.get(GlobalConstants.server_url + 
-      GlobalConstants.allTickets + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
-  }
+  public getAllTickets(pageData: PageData){
+    var url = GlobalConstants.server_url + 
+      GlobalConstants.allTickets + '?page=' + pageData.index + '&size=' + pageData.size  + 
+      '&sort=' + pageData.active + ',' + pageData.direction;
 
-  public getAllTicketsByStatus(id: string, page: number, size: number, active: any, direction: any) {
-    return this.httpService.get(GlobalConstants.server_url +
-      GlobalConstants.allTicketsByStatus + id + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
-  }
+    if(pageData.filter != null) {
+      url += '&filter=' + pageData.filter;
+    }
 
+    if(pageData.search != null) {
+      url += '&search=' + pageData.search;
+    }
+
+    return this.httpService.get(url);
+  }
+  
   public getUserTickets(id: string, page: number, size: number, active: any, direction: any) {
     return this.httpService.get(GlobalConstants.server_url + 
       GlobalConstants.userTickets + id + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
