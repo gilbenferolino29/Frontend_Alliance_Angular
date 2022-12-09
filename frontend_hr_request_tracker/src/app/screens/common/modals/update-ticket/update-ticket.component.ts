@@ -65,6 +65,24 @@ export class UpdateTicketComponent implements OnInit {
     }
   }
 
+  uploadFile() {
+    let fileData: FormData = new FormData();
+
+    fileData.append('file', this.file.value!);
+
+    this.queryService.attachFile(fileData).subscribe((res: any) => {
+      this.file.setValue(res.data.fileID);
+      this.updateTicket(this.data['ticket']);
+    });
+  }
+
+  onFileChanged(event: any) {
+    if(event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+      this.file.setValue(file);
+    }
+  }
+
   get f() {
     return this.form.controls;
   }

@@ -56,16 +56,19 @@
                     </mat-error>
                   </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile>
+            <mat-grid-tile *ngIf="data['ticket'].file != null">
                 <label for="file-name">Attached file: </label>
                 <a href="javascript:void(0)" class="disabled">
                     {{ data['ticket'].file != null ? data['ticket'].file.fileName : 'No file'}}
                 </a>
             </mat-grid-tile>
+            <mat-grid-tile *ngIf="data['ticket'].file == null">
+                <input type="file" name="file" id="input-file-id" (change)="onFileChanged($event)">
+            </mat-grid-tile>
         </mat-grid-list>
     </div>
     <div mat-dialog-actions>
       <button mat-button mat-dialog-close>Back</button>
-      <button mat-button (click)="updateTicket(data['ticket'])">Update</button>
+      <button mat-button (click)="file.value ? uploadFile() : updateTicket(data['ticket'])">Update</button>
     </div>
 </form>
