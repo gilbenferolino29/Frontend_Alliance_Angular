@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { Ticket } from 'src/app/models/ITicket';
+import { PageData } from 'src/app/models/PageData';
 import { QueryService } from 'src/app/services/query.service';
 import { UpdateTicketComponent } from '../../common/modals/update-ticket/update-ticket.component';
 import { ViewTicketComponent } from '../../common/modals/view-ticket/view-ticket.component';
@@ -20,19 +21,22 @@ export class DashboardHomeComponent implements OnInit {
   public agingTickets = new MatTableDataSource<Ticket>;
   public user = localStorage.getItem('user');
 
-  ticketsPageIndex = 0;
-  ticketsPageSize = 5;
-  ticketsCount = 0;
-  ticketsActive = '';
-  ticketsDirection = '';
-  isTicketsLoading = true;
+  defaultPageIndex = 0;
+  defaultPageSize = 5;
+  defaultCount = 0;
+  defaultActive = '';
+  defaultDirection = '';
+  defaultSearch = null;
+  defaultFilter = null;
 
-  agingPageIndex = 0;
-  agingPageSize = 5;
-  agingCount = 0;
-  agingActive = '';
-  agingDirection = '';
+  isTicketsLoading = true;
   isAgingLoading = true;
+
+  ticketPageData: PageData = new PageData(this.defaultPageIndex, this.defaultPageSize, 
+    this.defaultCount, this.defaultActive, this.defaultDirection, this.defaultSearch, this.defaultFilter);
+  
+  agingPageData: PageData = new PageData(this.defaultPageIndex, this.defaultPageSize, 
+    this.defaultCount, this.defaultActive, this.defaultDirection, this.defaultSearch, this.defaultFilter);
 
   constructor(
     private router: Router,
@@ -42,55 +46,56 @@ export class DashboardHomeComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
-    this.getUserTickets(this.ticketsPageIndex, this.ticketsPageSize, this.ticketsActive, this.ticketsDirection);
-    this.getAgingTickets(this.agingPageIndex, this.agingPageSize, this.agingActive, this.agingDirection);
+    this.getUserTickets();
+    this.getAgingTickets();
   }
 
-  getUserTickets(page: number, size: number, active: any, direction: any) {
+  getUserTickets() {
     this.isTicketsLoading = true;
-    this.queryService.getUserTickets(this.user!.toString(), page, size, active, direction).pipe(tap((res: any) => {
+    this.queryService.getUserTickets(this.user!.toString(), this.ticketPageData).pipe(tap((res: any) => {
       this.isTicketsLoading = false;
       this.userTickets.data = res.content;
-      this.ticketsCount = res.totalElements;
+      this.ticketPageData.count = res.totalElements;
     })).subscribe();
   }
 
   changeTicketPage(event: any) {
-    this.ticketsPageIndex = event.pageIndex;
-    this.ticketsPageSize = event.pageSize;
-    this.getUserTickets(this.ticketsPageIndex, this.ticketsPageSize, this.ticketsActive, this.ticketsDirection);
+    this.ticketPageData.index = event.pageIndex;
+    this.ticketPageData.size = event.pageSize;
+    this.getUserTickets();
   }
 
-  getAgingTickets(page: number, size: number, active: any, direction: any) {
+  getAgingTickets() {
     this.isAgingLoading = true;
-    this.queryService.getUserAgingTickets(this.user!.toString(), page, size, active, direction).pipe(tap((res: any) => {
+    this.queryService.getUserAgingTickets(this.user!.toString(), this.agingPageData).pipe(tap((res: any) => {
       this.isAgingLoading = false;
       this.agingTickets.data = res.content;
-      this.agingCount = res.totalElements;
+      this.agingPageData.count = res.totalElements;
     })).subscribe();
   }
 
   changeAgingPage(event: any) {
-    this.agingPageIndex = event.pageIndex;
-    this.agingPageSize = event.pageSize;
-    this.getAgingTickets(this.agingPageIndex, this.agingPageSize, this.agingActive, this.agingDirection);
+    this.agingPageData.index = event.pageIndex;
+    this.agingPageData.size = event.pageSize;
+    this.getAgingTickets();
   }
 
   sortAllTickets(event: any) {
-    this.ticketsActive = event.active;
-    this.ticketsDirection = event.direction;
-    this.getUserTickets(this.ticketsPageIndex, this.ticketsPageSize, this.ticketsActive, this.ticketsDirection);
+    this.ticketPageData.active = event.active;
+    this.ticketPageData.direction = event.direction;
+    this.getUserTickets();
   }
 
   sortAgingTickets(event: any) {
-    this.agingActive = event.active;
-    this.agingDirection = event.direction;
-    this.getAgingTickets(this.agingPageIndex, this.agingPageSize, this.agingActive, this.agingDirection);
+    this.agingPageData.active = event.active;
+    this.agingPageData.direction = event.direction;
+    this.getAgingTickets();
   }
 
-  logout() {
-    localStorage.clear();
-    window.location.reload();
+  searchKey(event: any) {
+    this.ticketPageData.search = event.target.value ? event.target.value.toLowerCase() : null;
+    this.ticketPageData.index = 0;
+    this.getUserTickets();
   }
 
   openDialogView(ticket: Ticket) {

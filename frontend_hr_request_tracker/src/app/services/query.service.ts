@@ -31,15 +31,27 @@ export class QueryService {
 
     return this.httpService.get(url);
   }
-  
-  public getUserTickets(id: string, page: number, size: number, active: any, direction: any) {
-    return this.httpService.get(GlobalConstants.server_url + 
-      GlobalConstants.userTickets + id + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
+
+  public getUserTickets(id: string, pageData: PageData) {
+    var url = GlobalConstants.server_url + 
+      GlobalConstants.userTickets + id + '?page=' + pageData.index + '&size=' + pageData.size  + 
+      '&sort=' + pageData.active + ',' + pageData.direction;
+
+    if(pageData.filter != null) {
+      url += '&filter=' + pageData.filter;
+    }
+
+    if(pageData.search != null) {
+      url += '&search=' + pageData.search;
+    }
+
+    return this.httpService.get(url);
   }
 
-  public getUserAgingTickets(id: string, page: number, size: number, active: any, direction: any) {
+  public getUserAgingTickets(id: string, pageData: PageData) {
     return this.httpService.get(GlobalConstants.server_url + 
-      GlobalConstants.userAgingTickets + id + '?page=' + page + '&size=' + size  + '&sort=' + active + ',' + direction);
+      GlobalConstants.userAgingTickets + id + '?page=' + pageData.index + 
+      '&size=' + pageData.size  + '&sort=' + pageData.active + ',' + pageData.direction);
   }
 
   public getAllAgingTickets(page: number, size: number, active: any, direction: any) {

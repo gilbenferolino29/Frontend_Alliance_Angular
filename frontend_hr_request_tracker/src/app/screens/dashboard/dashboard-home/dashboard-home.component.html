@@ -2,6 +2,13 @@
 <h1 class="container-header">Your Tickets</h1>
 <mat-divider></mat-divider>
 
+<div class="search">
+  <mat-form-field appearance="fill" id="searchBar">
+    <mat-label>Search</mat-label>
+    <input type="text" matInput (change)="searchKey($event)">
+  </mat-form-field>
+</div>
+
 <div id="table-container">
   <table mat-table [dataSource]="userTickets" class="mat-elevation-z8" matSort (matSortChange)="sortAllTickets($event)">
     <ng-container matColumnDef="ticketID">
@@ -57,8 +64,8 @@
   </div>
 
   <mat-paginator
-      [length]="ticketsCount"
-      [pageSize]="ticketsPageSize"
+      [length]="ticketPageData.count"
+      [pageSize]="ticketPageData.size"
       (page)="changeTicketPage($event)">
   </mat-paginator>
 </div>
@@ -123,8 +130,8 @@
   </div>
 
   <mat-paginator
-      [length]="agingCount"
-      [pageSize]="agingPageSize"
+      [length]="agingPageData.count"
+      [pageSize]="agingPageData.size"
       (page)="changeAgingPage($event)">
   </mat-paginator>
 </div>
