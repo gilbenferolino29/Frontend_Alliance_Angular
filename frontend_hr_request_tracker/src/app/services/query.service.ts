@@ -37,10 +37,6 @@ export class QueryService {
       GlobalConstants.userTickets + id + '?page=' + pageData.index + '&size=' + pageData.size  + 
       '&sort=' + pageData.active + ',' + pageData.direction;
 
-    if(pageData.filter != null) {
-      url += '&filter=' + pageData.filter;
-    }
-
     if(pageData.search != null) {
       url += '&search=' + pageData.search;
     }

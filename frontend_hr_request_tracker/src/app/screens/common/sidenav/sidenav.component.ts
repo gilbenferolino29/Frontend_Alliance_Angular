@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent implements OnInit, AfterViewInit {
-  navLinks = ['Dashboard', 'Tickets', 'Users', 'Trackers', 'Roles'];
+  navLinks = ['Dashboard', 'Tickets', 'Aging Tickets', 'Users', 'Trackers', 'Roles'];
   @ViewChild('drawer') sidenav!: MatSidenav;
 
   username = localStorage.getItem('username');
@@ -19,7 +19,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     if(this.role != 'ADMIN') {
-      this.navLinks.splice(2, 3);
+      this.navLinks.splice(2, 4);
     }
   }
 
@@ -33,8 +33,8 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   }
 
   clickNav(event: any) {
-    var destination = event.target.innerText.toLowerCase();
-    this.router.navigate([destination]);
+    var destination = event.target.innerText.split(" ");
+    this.router.navigate([destination[0].toLowerCase()]);
   }
 
   checkAuthenticated() {
