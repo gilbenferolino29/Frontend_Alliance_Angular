@@ -15,6 +15,9 @@ export class AuthService {
   public forgotPassword(email: any) {
     return this.httpService.get(GlobalConstants.server_url + GlobalConstants.forgotPassword + '?email=' + email);
   }
+  public resetPassword(id: string, data: any) {
+    return this.httpService.post(GlobalConstants.server_url + GlobalConstants.resetPassword + id, data);
+  }
 
   //TOKEN REQUESTS
   public getTokenInfo(id: string) {

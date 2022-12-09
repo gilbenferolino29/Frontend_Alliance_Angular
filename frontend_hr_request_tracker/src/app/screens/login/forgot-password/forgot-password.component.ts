@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { mergeMap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,9 +14,13 @@ export class ForgotPasswordComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]]
   });
 
+  loginAttempt = false;
+  loginFailed = false;
+
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -31,11 +36,14 @@ export class ForgotPasswordComponent implements OnInit {
 
   submit() {
     if(this.form.valid) {
+      this.loginAttempt = true;
       let email = this.f.email.value?.toString();
 
       this.authService.forgotPassword(email).subscribe((res: any) => {
         if(res !== null) {
+          this.router.navigate(['/reset-password', res.userID]);
         } else {
+          this.loginFailed = true;
           throw('Email not found.');
         }
       });

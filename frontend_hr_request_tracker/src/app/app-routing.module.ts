@@ -5,6 +5,7 @@ import { DashboardHomeComponent } from './screens/dashboard/dashboard-home/dashb
 import { LandingpageComponent } from './screens/landing-page/landingpage/landingpage.component';
 import { ForgotPasswordComponent } from './screens/login/forgot-password/forgot-password.component';
 import { LoginComponent } from './screens/login/login/login.component';
+import { ResetPasswordComponent } from './screens/login/reset-password/reset-password.component';
 import { HomeRoleComponent } from './screens/roles/home-role/home-role.component';
 import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracker.component';
 import { UserHomeComponent } from './screens/user-screens/home-ticket-user/user-home/user-home.component';
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset-password/:id',
+    component: ResetPasswordComponent
   },
   {
     path: 'dashboard',

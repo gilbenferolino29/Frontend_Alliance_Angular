@@ -50,6 +50,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { AllAgingTicketsComponent } from './screens/dashboard/all-aging-tickets/all-aging-tickets.component';
 import { SidenavComponent } from './screens/common/sidenav/sidenav.component';
 import { ForgotPasswordComponent } from './screens/login/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './screens/login/reset-password/reset-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +77,8 @@ import { ForgotPasswordComponent } from './screens/login/forgot-password/forgot-
     DashboardHomeComponent,
     AllAgingTicketsComponent,
     SidenavComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
