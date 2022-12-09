@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
+    localStorage.setItem('resetPassword', 'false');
   }
 
   nav(destination: string) {

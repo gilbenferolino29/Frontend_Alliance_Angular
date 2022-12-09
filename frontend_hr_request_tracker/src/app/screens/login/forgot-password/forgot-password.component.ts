@@ -41,6 +41,7 @@ export class ForgotPasswordComponent implements OnInit {
 
       this.authService.forgotPassword(email).subscribe((res: any) => {
         if(res !== null) {
+          localStorage.setItem('resetPassword', 'true');
           this.router.navigate(['/reset-password', res.userID]);
         } else {
           this.loginFailed = true;

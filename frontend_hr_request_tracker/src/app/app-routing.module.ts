@@ -14,6 +14,7 @@ import { ReportCategoryCountComponent } from './screens/user-screens/report-cate
 import { ReportUserCountComponent } from './screens/user-screens/report-user-count/report-user-count.component';
 import { HomeUserComponent } from './screens/users/home-user/home-user.component';
 import { AuthGuard } from './shared/auth.guard';
+import { ResetPasswordGuard } from './shared/reset-password.guard';
 
 const routes: Routes = [
   {
@@ -30,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'reset-password/:id',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
+    canActivate: [ResetPasswordGuard]
   },
   {
     path: 'dashboard',

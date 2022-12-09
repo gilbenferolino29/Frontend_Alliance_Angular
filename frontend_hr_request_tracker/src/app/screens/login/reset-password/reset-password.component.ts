@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -41,7 +42,8 @@ export class ResetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private _snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -69,7 +71,10 @@ export class ResetPasswordComponent implements OnInit {
 
       this.authService.resetPassword(this.userID.toString(), formData).subscribe((res: any) => {
         if(res.data == 1) {
-          this.router.navigate(['login']);
+          this.openSnackbar('Password successfully changed.', 'Dismiss');
+          setTimeout(() => {
+            this.router.navigate(['login']);
+          }, 1000)
         } else {
           throw('Error changing password.');
         }
@@ -77,5 +82,11 @@ export class ResetPasswordComponent implements OnInit {
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+  openSnackbar(message: string, action: string) {
+    this._snackbar.open(message, action, {
+      duration: 3000
+    });
   }
 }
