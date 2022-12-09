@@ -14,6 +14,8 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   username = localStorage.getItem('username');
   role = localStorage.getItem('role');
 
+  isAuthenticated = false;
+
   constructor(private router: Router) { 
   }
 
@@ -40,6 +42,8 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   checkAuthenticated() {
     if(!localStorage.getItem('user')) {
       this.sidenav.toggle();
+    } else {
+      this.isAuthenticated = true;
     }
   }
 
