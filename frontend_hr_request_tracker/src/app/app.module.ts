@@ -52,6 +52,7 @@ import { SidenavComponent } from './screens/common/sidenav/sidenav.component';
 import { ForgotPasswordComponent } from './screens/login/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './screens/login/reset-password/reset-password.component';
 import { ReportAgingComponent } from './screens/user-screens/report-aging/report-aging.component';
+import { ReportUserCountComponent } from './screens/user-screens/report-user-count/report-user-count.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,7 +81,8 @@ import { ReportAgingComponent } from './screens/user-screens/report-aging/report
     SidenavComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    ReportAgingComponent
+    ReportAgingComponent,
+    ReportUserCountComponent
   ],
   imports: [
     BrowserModule,

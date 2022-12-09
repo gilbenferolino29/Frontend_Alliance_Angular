@@ -10,6 +10,7 @@ import { HomeRoleComponent } from './screens/roles/home-role/home-role.component
 import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracker.component';
 import { UserHomeComponent } from './screens/user-screens/home-ticket-user/user-home/user-home.component';
 import { ReportAgingComponent } from './screens/user-screens/report-aging/report-aging.component';
+import { ReportUserCountComponent } from './screens/user-screens/report-user-count/report-user-count.component';
 import { HomeUserComponent } from './screens/users/home-user/home-user.component';
 import { AuthGuard } from './shared/auth.guard';
 
@@ -55,6 +56,11 @@ const routes: Routes = [
   {
     path: 'reports/aging',
     component: ReportAgingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'reports/user-count',
+    component: ReportUserCountComponent,
     canActivate: [AuthGuard]
   },
   {

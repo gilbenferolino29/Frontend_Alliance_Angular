@@ -223,15 +223,6 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  exportUserCountCsv() {
-    this.queryService.exportCountUser(this.csvHttpOptions).subscribe(res => {
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
-      link.download = 'count_user.csv';
-      link.click();
-    });
-  }
-
   isAuthorized(ticket: Ticket) {
     if(ticket.assignee.userID.toString() == this.user || this.role == "ADMIN") {
       return true;
