@@ -12,6 +12,9 @@ export class AuthService {
   public login(data: any) {
     return this.httpService.post(GlobalConstants.server_url + GlobalConstants.login, data);
   }
+  public forgotPassword(email: any) {
+    return this.httpService.get(GlobalConstants.server_url + GlobalConstants.forgotPassword + '?email=' + email);
+  }
 
   //TOKEN REQUESTS
   public getTokenInfo(id: string) {

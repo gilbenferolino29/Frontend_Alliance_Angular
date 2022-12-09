@@ -49,6 +49,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { AllAgingTicketsComponent } from './screens/dashboard/all-aging-tickets/all-aging-tickets.component';
 import { SidenavComponent } from './screens/common/sidenav/sidenav.component';
+import { ForgotPasswordComponent } from './screens/login/forgot-password/forgot-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,8 @@ import { SidenavComponent } from './screens/common/sidenav/sidenav.component';
     DeleteUserComponent,
     DashboardHomeComponent,
     AllAgingTicketsComponent,
-    SidenavComponent
+    SidenavComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,

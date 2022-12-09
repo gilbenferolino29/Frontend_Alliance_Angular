@@ -43,6 +43,7 @@ export class GlobalConstants {
         //GET
     public static userInfo = "user/";
     public static allUsers = "users/";
+    public static forgotPassword = "forgot-password/"
     
     public static login = "login/"
     public static createUser = "users/create/";

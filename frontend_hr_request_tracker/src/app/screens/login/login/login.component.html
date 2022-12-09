@@ -1,63 +1,45 @@
-
-        <div class="container left">
-            <div class="img-container">
-              <img src="assets/3d2.png" alt="">
-            </div>
-        </div>
-        
-        <div class="container right">
-            <div class="login-container">
-                <div class = "login-container img-welcome">
-                    <h1>Login</h1>
-                    
-                </div>
-                <h3>Always keep track on your HR reqeusts!</h3>
-                <div>
-                    <form class="login-form" [formGroup]="form">
-                        <mat-form-field class="example-full-width">
-                          <mat-label>Email</mat-label>
-                          <input type="email" matInput [formControl]="email" placeholder="Ex. pat@example.com">
-                          <mat-error *ngIf="email.hasError('required')">
-                            Email is <strong>required</strong>
-                          </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                          <mat-label>Password</mat-label>
-                          <input type="Password" matInput [formControl]="password">
-                          <mat-error *ngIf="password.hasError('required')">
-                            Password is <strong>required</strong>
-                          </mat-error>
-                        </mat-form-field>
-                        <mat-error *ngIf="loginAttempt && loginFailed">
-                          The username or password you entered is incorrect.
-                        </mat-error>
-                        <div id="login-creds">
-                          <label for="remember"><input id="remember"type="checkbox"> Remember me?</label>
-                          <a href="" onclick="return false;">Forgot password</a>
-                        </div>
-                        
-                      </form>
-                </div>
-                <button (click)="login()">Login</button>
-                <p>Not a member? <a href="" onclick="return false;">Sign up</a></p>
-                
-            </div>
-        </div> 
-    
-
-
- 
-        
-
-
-
-
-
-
-
-
-<!-- <footer>
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
-        <a href="instagram.com/"><img src="../assets/images/alliance.png" /></a>
+<div class="container left">
+    <div class="img-container">
+      <img src="assets/3d2.png" alt="">
     </div>
+</div>
+
+<div class="container right">
+    <div class="login-container">
+        <div class = "login-container img-welcome">
+            <h1>Login</h1>
+        </div>
+        <h3>Always keep track on your HR requests!</h3>
+        <div>
+            <form class="login-form" [formGroup]="form">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput [formControl]="email" placeholder="Ex. pat@example.com">
+                  <mat-error *ngIf="email.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                  <mat-label>Password</mat-label>
+                  <input type="Password" matInput [formControl]="password">
+                  <mat-error *ngIf="password.hasError('required')">
+                    Password is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-error *ngIf="loginAttempt && loginFailed">
+                  The username or password you entered is incorrect.
+                </mat-error>
+                <div id="login-creds">
+                  <a href="/forgot-password">Forgot password</a>
+                </div>
+                
+              </form>
+        </div>
+        <button (click)="login()">Login</button>      
+    </div>
+</div> 
+<!-- <footer>
+<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
+<a href="instagram.com/"><img src="../assets/images/alliance.png" /></a>
+</div>
 </footer> -->
