@@ -1,0 +1,69 @@
+<h1 mat-dialog-title>Update User</h1>
+<form [formGroup]="form">
+    <div mat-dialog-content>
+        <mat-grid-list cols="3" rowHeight="3:1">
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input matInput [formControl]="username" required>
+                    <mat-error *ngIf="username.hasError('required')">
+                        Username field is required.
+                    </mat-error>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput [formControl]="userFName" required>
+                    <mat-error *ngIf="userFName.hasError('required')">
+                        First name field is required.
+                    </mat-error>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput [formControl]="userLName" required>
+                    <mat-error *ngIf="userLName.hasError('required')">
+                        Last name field is required.
+                    </mat-error>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput [formControl]="userEmail" required>
+                    <mat-error *ngIf="userEmail.hasError('required')">
+                        Email field is required.
+                    </mat-error>
+                    <mat-error *ngIf="userEmail.hasError('email')">
+                        Email input is invalid.
+                    </mat-error>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [formControl]="userPassword" required>
+                  </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field appearance="fill">
+                    <mat-label>Role</mat-label>
+                    <mat-select [formControl]="userRole" required>
+                        <mat-option *ngFor="let role of roleList" [value]="role.roleID">
+                            {{ role.roleName }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="userRole.hasError('required')">
+                        Role field is required.
+                    </mat-error>
+                  </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close>Back</button>
+      <button mat-button (click)="updateUser()">Update</button>
+    </div>
+</form>

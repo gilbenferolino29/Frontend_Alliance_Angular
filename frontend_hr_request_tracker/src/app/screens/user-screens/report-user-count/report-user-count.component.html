@@ -1,0 +1,28 @@
+<h1 class="container-header">User Ticket Count Report</h1>
+<mat-divider></mat-divider>
+
+<div class="demo-button-container">
+  <button mat-raised-button color="primary" matTooltip="Generate ticket count per user" (click)="exportUserCountCsv()">
+    Export to CSV
+  </button>
+
+<div id="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="assigneeID">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.userID}} </td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef> User </th>
+        <td mat-cell *matCellDef="let element"> {{element.user.userFName}} {{element.user.userLName}} </td>
+      </ng-container>
+    <ng-container matColumnDef="ticketCount">
+      <th mat-header-cell *matHeaderCellDef> Ticket Count </th>
+      <td mat-cell *matCellDef="let element"> {{element.userCount }} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

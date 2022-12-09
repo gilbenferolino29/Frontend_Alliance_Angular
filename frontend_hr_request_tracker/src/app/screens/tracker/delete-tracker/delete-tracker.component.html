@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete tracker</h1>
+<div mat-dialog-content>
+  Are you sure you would like to delete Tracker {{ data['tracker'].typeName }} ?
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Back</button>
+  <button mat-button mat-dialog-close (click)="deleteTracker(data['tracker'])">Confirm</button>
+</div>

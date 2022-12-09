@@ -15,9 +15,24 @@ export class GlobalConstants {
         //GET
     public static ticketInfo = "ticket/";
     public static allTickets = "tickets/";
+    public static allTicketsByStatus = "tickets/status/";
+    public static userTickets = "tickets/user/";
+    public static userAgingTickets = "aging/";
+    public static allAgingTickets = "aging/";
+
+    public static agingByCategory = "tickets/category/aging";
+    public static categoryTicketCount = "tickets/category/count";
+    public static userTicketCount = "tickets/user/count";
+
+    public static exportAllTickets = "tickets/all/export"
+    public static exportAgingByCategory = "tickets/category/aging/export";
+    public static exportCategoryCount = "tickets/category/count/export";
+    public static exportUserCount = "tickets/user/count/export";
         //POST
     public static createTicket = "tickets/create/";
     public static updateTicket = "tickets/update/";
+    public static updateAssignee = "tickets/update/assignee/";
+    public static updateStatus = "tickets/update/status/";
         //DELETE
     public static deleteTicket = "tickets/delete/";
 
@@ -25,14 +40,42 @@ export class GlobalConstants {
         //GET
     public static ticketTypeInfo = "tickets-type/";
     public static allTicketTypes = "ticket-types/";
+    public static createTicketType = "ticket-types/create/";
+    public static updateTicketType = "ticket-types/update/";
+    public static deleteTicketType = "ticket-types/delete/";
     
     //USER URLS
         //GET
     public static userInfo = "user/";
     public static allUsers = "users/";
+    public static forgotPassword = "forgot-password/"
+    public static resetPassword = "reset-password/"
+    
+    public static login = "login/"
+    public static createUser = "users/create/";
+    public static updateUser = "users/update/";
+    public static deleteUser = "users/delete/"
 
     //STATUS URLS
         //GET
     public static statusInfo = "status/";
     public static allStatus = "status/";
+
+    //ROLE URLS
+        //GET
+    public static allRoles = "roles/";
+    public static createRole = "roles/create/";
+    public static updateRole = "roles/update/";
+    public static deleteRole = "roles/delete/";
+
+    //FILE URLS
+    public static attachFile = "upload/";
+    public static viewFile = "file/"
+
+    //TOKEN URLS
+    public static tokenInfo = "token/";
+    public static authenticate = "authenticate/";
+
+    public static generateToken = "token/create/";
+    public static deleteToken = "token/delete/"
 }

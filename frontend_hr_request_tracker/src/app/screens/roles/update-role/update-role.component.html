@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Update Role</h1>
+<form [formGroup]="form">
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill">
+        <mat-label>Role Name</mat-label>
+        <input matInput [formControl]="roleName" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Role Abbreviation</mat-label>
+        <input matInput [formControl]="roleAbbv" required>
+      </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Back</button>
+  <button mat-button (click)="updateRole()">Create</button>
+</div>
+</form>

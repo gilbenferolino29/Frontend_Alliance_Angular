@@ -6,6 +6,7 @@ export interface Ticket {
     assignee: User;
     tracker: TicketType;
     status: Status;
+    file: File;
     subject: String;
     description: String;
     createdAt: Array<any>;
