@@ -214,15 +214,6 @@ export class UserHomeComponent implements OnInit {
     });
   }
 
-  exportCategoryCountCsv() {
-    this.queryService.exportCountCategory(this.csvHttpOptions).subscribe(res => {
-      const link = document.createElement('a');
-      link.href = window.URL.createObjectURL(new Blob([res as any], {type: 'text/csv'}));
-      link.download = 'count_category.csv';
-      link.click();
-    });
-  }
-
   isAuthorized(ticket: Ticket) {
     if(ticket.assignee.userID.toString() == this.user || this.role == "ADMIN") {
       return true;

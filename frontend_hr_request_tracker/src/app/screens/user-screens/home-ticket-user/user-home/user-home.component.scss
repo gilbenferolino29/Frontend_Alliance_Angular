@@ -143,5 +143,11 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
 
 .footer-links > a {
+  font-weight: 500;
   margin-right: 1%;
+}
+
+.footer-links > label {
+  color: grey;
+  margin-right: 0.5%; 
 }

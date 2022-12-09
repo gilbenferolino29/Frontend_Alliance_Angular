@@ -53,6 +53,7 @@ import { ForgotPasswordComponent } from './screens/login/forgot-password/forgot-
 import { ResetPasswordComponent } from './screens/login/reset-password/reset-password.component';
 import { ReportAgingComponent } from './screens/user-screens/report-aging/report-aging.component';
 import { ReportUserCountComponent } from './screens/user-screens/report-user-count/report-user-count.component';
+import { ReportCategoryCountComponent } from './screens/user-screens/report-category-count/report-category-count.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +83,8 @@ import { ReportUserCountComponent } from './screens/user-screens/report-user-cou
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ReportAgingComponent,
-    ReportUserCountComponent
+    ReportUserCountComponent,
+    ReportCategoryCountComponent
   ],
   imports: [
     BrowserModule,
