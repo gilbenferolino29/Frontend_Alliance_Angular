@@ -54,6 +54,7 @@ import { ResetPasswordComponent } from './screens/login/reset-password/reset-pas
 import { ReportAgingComponent } from './screens/user-screens/report-aging/report-aging.component';
 import { ReportUserCountComponent } from './screens/user-screens/report-user-count/report-user-count.component';
 import { ReportCategoryCountComponent } from './screens/user-screens/report-category-count/report-category-count.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,7 +112,8 @@ import { ReportCategoryCountComponent } from './screens/user-screens/report-cate
     MatMenuModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
-    MatSortModule
+    MatSortModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
