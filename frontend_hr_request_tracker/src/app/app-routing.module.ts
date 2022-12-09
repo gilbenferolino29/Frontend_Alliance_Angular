@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminHomeComponent } from './screens/admin-screens/home-ticket-admin/admin-home/admin-home.component';
-import { CreateTicketComponent } from './screens/create-ticket/create-ticket.component';
 import { AllAgingTicketsComponent } from './screens/dashboard/all-aging-tickets/all-aging-tickets.component';
 import { DashboardHomeComponent } from './screens/dashboard/dashboard-home/dashboard-home.component';
 import { LandingpageComponent } from './screens/landing-page/landingpage/landingpage.component';
@@ -10,7 +8,6 @@ import { HomeRoleComponent } from './screens/roles/home-role/home-role.component
 import { HomeTrackerComponent } from './screens/tracker/home-tracker/home-tracker.component';
 import { UserHomeComponent } from './screens/user-screens/home-ticket-user/user-home/user-home.component';
 import { HomeUserComponent } from './screens/users/home-user/home-user.component';
-import { ViewticketComponent } from './screens/viewticket/viewticket.component';
 import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
@@ -40,21 +37,9 @@ const routes: Routes = [
     component: LandingpageComponent
   },
   {
-    path: 'createticket',
-    component: CreateTicketComponent
-  },
-  {
     path: 'tickets',
     component: UserHomeComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'viewticket',
-    component: ViewticketComponent
-  },
-  {
-    path: 'admin',
-    component: AdminHomeComponent
   },
   {
     path: 'trackers',
